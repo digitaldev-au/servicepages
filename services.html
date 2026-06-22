@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="#0E1C6D"/><text x="200" y="240" font-family="Archivo,Arial,sans-serif" font-weight="800" font-style="italic" font-size="130" fill="#ffffff" text-anchor="middle">P<tspan fill="#E0403B">+</tspan>L</text></svg></template>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+  <style>
+    :root{--navy:#0E1C6D;--red:#E0403B;--ink:#1A2030;--muted:#6A7186;--line:#ECEEF2;--mist:#F7F8FA}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:#fff}
+    ::selection{background:#E0403B;color:#fff}
+    .navlink{transition:color .2s}
+    .navlink:hover{color:var(--red) !important}
+    .btn-red{transition:background .2s,transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+    .btn-red:hover{background:#C8332E !important;transform:translateY(-3px);box-shadow:0 14px 28px rgba(224,64,59,0.34)}
+    .btn-red:active{transform:translateY(-1px);box-shadow:0 6px 14px rgba(224,64,59,0.30)}
+    .btn-navy{transition:background .2s,transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+    .btn-navy:hover{background:#182A9E !important;transform:translateY(-3px);box-shadow:0 14px 28px rgba(14,28,109,0.30)}
+    .btn-navy:active{transform:translateY(-1px);box-shadow:0 6px 14px rgba(14,28,109,0.26)}
+    .btn-outline{transition:background .25s,color .25s,border-color .25s,transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+    .btn-outline:hover{background:var(--navy) !important;color:#fff !important;border-color:var(--navy) !important;transform:translateY(-3px);box-shadow:0 14px 28px rgba(14,28,109,0.20)}
+    .btn-outline:active{transform:translateY(-1px)}
+    .btn-ghost{transition:background .25s,color .25s,border-color .25s,transform .25s cubic-bezier(.2,.7,.3,1)}
+    .btn-ghost:hover{background:#fff !important;color:var(--navy) !important;border-color:#fff !important;transform:translateY(-3px)}
+    .btn-ghost:active{transform:translateY(-1px)}
+    .nav-dd{position:relative}
+    .nav-dd-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:240px;background:#fff;border:1px solid var(--line);border-radius:0;box-shadow:0 22px 50px rgba(14,28,109,0.14);padding:8px;opacity:0;visibility:hidden;transition:opacity .2s,transform .2s;z-index:70}
+    .nav-dd:hover .nav-dd-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(2px)}
+    .nav-dd-menu::before{content:'';position:absolute;top:-14px;left:0;right:0;height:14px}
+    .nav-dd-item{display:block;padding:11px 14px;border-radius:2px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:14.5px;color:#4A5268;text-decoration:none;transition:background .15s,color .15s;white-space:nowrap}
+    .nav-dd-item:hover{background:var(--mist);color:var(--red)}
+    .nav-caret{display:inline-block;margin-left:5px;font-size:10px;transition:transform .2s}
+    .nav-dd:hover .nav-caret{transform:rotate(180deg)}
+    .svc-card{transition:box-shadow .3s,transform .3s,border-color .3s}
+    .svc-card:hover{box-shadow:0 26px 56px rgba(14,28,109,0.14);transform:translateY(-6px);border-color:var(--navy) !important}
+    .svc-card:hover .svc-link{color:var(--red)}
+    .svc-card:hover .svc-tile{background:var(--red) !important}
+    .svc-arrow{display:inline-block;transition:transform .3s}
+    .svc-card:hover .svc-arrow{transform:translateX(7px)}
+    .area-chip{transition:color .2s,border-color .2s,background .2s}
+    .area-chip:hover{color:var(--red) !important;border-color:var(--red) !important;background:#fff !important}
+    @keyframes tmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .tmarq-track{display:flex;gap:24px;width:max-content;animation:tmarq 48s linear infinite}
+    .tmarq-wrap:hover .tmarq-track{animation-play-state:paused}
+    .tcard{flex:none;width:430px;background:#fff;padding:40px;border-top:3px solid var(--red)}
+    .flink{transition:color .2s}
+    .flink:hover{color:#fff !important}
+    .fsoc{transition:background .2s,color .2s}
+    .fsoc:hover{background:var(--red) !important;color:#fff !important}
+  </style>
+</helmet>
+
+<div style="font-family:'Hanken Grotesk',sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden">
+
+  <!-- ===== HEADER ===== -->
+  <header style="background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60">
+    <div style="max-width:1200px;margin:0 auto;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="index.html"><img src="assets/ptl-logo-dark.png" alt="PT&amp;L Equipment Services" style="height:42px;display:block"></a>
+      <nav style="display:flex;align-items:center;gap:36px;font-family:'Archivo',sans-serif;font-weight:600;font-size:15px">
+        <a class="navlink" href="index.html" style="color:#4A5268;text-decoration:none">Home</a>
+        <a class="navlink" href="about.html" style="color:#4A5268;text-decoration:none">About</a>
+        <span class="nav-dd" style="display:inline-flex;align-items:center">
+          <a class="navlink" href="services.html" style="color:var(--navy);text-decoration:none">Services<span class="nav-caret">▾</span></a>
+          <span class="nav-dd-menu">
+            <sc-for list="{{ navServices }}" as="s" hint-placeholder-count="6">
+              <a class="nav-dd-item" href="#services">{{ s }}</a>
+            </sc-for>
+          </span>
+        </span>
+        <span class="nav-dd" style="display:inline-flex;align-items:center">
+          <a class="navlink" href="areas.html" style="color:#4A5268;text-decoration:none">Areas<span class="nav-caret">▾</span></a>
+          <span class="nav-dd-menu">
+            <a class="nav-dd-item" href="melbourne-west.html">Melbourne West</a>
+          </span>
+        </span>
+        <a class="navlink" href="contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
+        <a class="navlink" href="book.html" style="color:#4A5268;text-decoration:none">Book</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:22px">
+        <a href="tel:+61400184717" style="text-decoration:none;line-height:1.15;text-align:right">
+          <span style="display:block;font-size:12px;color:var(--muted)">Call us today</span>
+          <span style="display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--navy);white-space:nowrap">+61 400 184 717</span>
+        </a>
+        <a class="btn-red" href="contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--red);border-radius:2px;padding:13px 24px;text-decoration:none;white-space:nowrap">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section style="position:relative;background:var(--navy);overflow:hidden;padding:96px 56px 104px">
+    <div style="position:absolute;inset:0;background:url('uploads/commercial-oven-maintenance.jpg') center/cover;opacity:0.2;z-index:0"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(100deg,var(--navy) 32%,rgba(14,28,109,0.55) 100%);z-index:1"></div>
+    <div style="position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--red);z-index:3"></div>
+    <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:var(--red);clip-path:polygon(100% 0,100% 100%,0 0);z-index:2;opacity:0.9"></div>
+    <div style="max-width:1200px;margin:0 auto;position:relative;z-index:2">
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-size:14px;color:#AEB6E0;margin-bottom:24px">
+        <a href="index.html" style="color:#AEB6E0;text-decoration:none">Home</a>
+        <span style="margin:0 10px;color:#5E68A0">/</span>
+        <span style="color:#fff">Services</span>
+      </div>
+      <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px;margin-bottom:24px">What we do</span>
+      <h1 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:56px;line-height:1.04;letter-spacing:-0.03em;color:#fff;margin:0;max-width:880px">Everything your commercial kitchen <span style="text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:7px;text-underline-offset:6px">needs</span></h1>
+      <p style="font-size:19px;line-height:1.6;color:#AEB6E0;margin:26px 0 0;max-width:660px">Servicing, maintaining and repairing commercial kitchen equipment and appliances across South East Melbourne and Brisbane.</p>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES GRID ===== -->
+  <section id="services" style="background:#fff;padding:130px 56px">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:56px;flex-wrap:wrap">
+        <div style="max-width:640px">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+            <span style="width:28px;height:2px;background:var(--red)"></span>
+            <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:var(--red)">Our services</span>
+          </div>
+          <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:44px;line-height:1.05;letter-spacing:-0.025em;color:var(--navy);margin:0">Commercial equipment repairs Melbourne</h2>
+        </div>
+        <p style="font-size:18px;line-height:1.65;color:var(--muted);margin:0 0 6px;max-width:360px">From emergency breakdowns to scheduled servicing — qualified technicians for every appliance in your kitchen.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+        <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
+          <div class="svc-card" style="background:#fff;border:1px solid var(--line);border-radius:0;padding:36px 34px 34px;display:flex;flex-direction:column">
+            <span class="svc-tile" style="width:60px;height:60px;border-radius:0;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:24px;transition:background .3s">{{ s.icon }}</span>
+            <h3 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:22px;color:var(--navy);margin:0 0 12px">{{ s.title }}</h3>
+            <p style="font-size:15.5px;line-height:1.6;color:var(--muted);margin:0 0 24px;flex:1">{{ s.desc }}</p>
+            <span class="svc-link" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:var(--navy);display:inline-flex;align-items:center;gap:8px">Learn more <span class="svc-arrow" style="color:var(--red);display:inline-flex">{{ arrowIcon }}</span></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APPLIANCE REPAIRS ===== -->
+  <section style="background:var(--mist);padding:130px 56px">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+      <div style="position:relative">
+        <image-slot id="svc-appliance" src="uploads/bearded-handyman-in-working-overall-repairing-coff-F8G2AEF.jpg" fit="cover" radius="0" placeholder="Drop a technician repairing equipment" style="width:100%;height:520px"></image-slot>
+        <div style="position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--red)"></div>
+        <div style="position:absolute;top:0;right:0;width:88px;height:88px;background:var(--red);clip-path:polygon(100% 0,100% 100%,0 0)"></div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+          <span style="width:28px;height:2px;background:var(--red)"></span>
+          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:var(--red)">Appliance repairs</span>
+        </div>
+        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:40px;line-height:1.08;letter-spacing:-0.02em;color:var(--navy);margin:0 0 22px">Melbourne &amp; Brisbane appliance repair, made easy</h2>
+        <p style="font-size:17px;line-height:1.7;color:var(--muted);margin:0 0 18px">When a kitchen appliance in your restaurant, cafe or bar goes out of order, it can seriously affect your business and leave customers unhappy. We offer reliable, professional commercial appliance repairs to businesses across South East Melbourne.</p>
+        <p style="font-size:17px;line-height:1.7;color:var(--muted);margin:0 0 28px">Our qualified technicians fix all types of commercial kitchen appliances, including:</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 28px">
+          <sc-for list="{{ appliances }}" as="a" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="width:34px;height:34px;border-radius:0;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 12px rgba(14,28,109,0.06)">{{ a.icon }}</span>
+              <span style="font-weight:600;font-size:16px;color:var(--ink)">{{ a.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AREAS ===== -->
+  <section id="areas" style="background:#fff;padding:130px 56px">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="max-width:720px;margin-bottom:56px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+          <span style="width:28px;height:2px;background:var(--red)"></span>
+          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:var(--red)">Areas we service</span>
+        </div>
+        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:42px;line-height:1.08;letter-spacing:-0.02em;color:var(--navy);margin:0 0 16px">Servicing Victoria &amp; Queensland</h2>
+        <p style="font-size:18px;line-height:1.65;color:var(--muted);margin:0">Mobile technicians covering South East Melbourne and Brisbane. Don't see your suburb? Call us — we likely cover it.</p>
+      </div>
+      <sc-for list="{{ regions }}" as="r" hint-placeholder-count="2">
+        <div style="margin-bottom:44px">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px">
+            <span style="font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#fff;background:var(--navy);padding:8px 16px">{{ r.name }}</span>
+            <span style="flex:1;height:1px;background:var(--line)"></span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <sc-for list="{{ r.suburbs }}" as="s" hint-placeholder-count="24">
+              <span class="area-chip" style="font-size:14.5px;color:#3C4660;background:var(--mist);border:1px solid var(--line);border-radius:0;padding:9px 16px;cursor:default">{{ s }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ===== MAINTENANCE (navy) ===== -->
+  <section style="background:var(--navy);padding:140px 56px">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:0.9fr 1.1fr;gap:72px;align-items:center">
+      <div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+          <span style="width:28px;height:2px;background:var(--red)"></span>
+          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">Planned maintenance</span>
+        </div>
+        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:42px;line-height:1.06;letter-spacing:-0.025em;color:#fff;margin:0 0 22px">Prevent breakdowns before they happen</h2>
+        <p style="font-size:18px;line-height:1.7;color:#AEB6E0;margin:0 0 32px;max-width:440px">Planned maintenance is the perfect way to take care of issues before they turn disastrous. Rather than fixing a fault when your equipment grinds to a halt, we tend to it regularly — so nothing fails suddenly and your operations stay running.</p>
+        <a class="btn-red" href="contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:16px 30px;text-decoration:none;display:inline-block">Schedule a Maintenance Plan</a>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+        <sc-for list="{{ maintenance }}" as="m" hint-placeholder-count="4">
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:0;padding:28px">
+            <span style="width:48px;height:48px;border-radius:0;background:rgba(224,64,59,0.18);color:#FF9591;display:flex;align-items:center;justify-content:center;margin-bottom:18px">{{ m.icon }}</span>
+            <h3 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 8px">{{ m.title }}</h3>
+            <p style="font-size:14.5px;line-height:1.55;color:#AEB6E0;margin:0">{{ m.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NARRATIVE ===== -->
+  <section style="background:#fff;padding:130px 56px">
+    <div style="max-width:1080px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+        <span style="width:28px;height:2px;background:var(--red)"></span>
+        <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:var(--red)">Why it matters</span>
+      </div>
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:40px;line-height:1.1;letter-spacing:-0.02em;color:var(--navy);margin:0 0 32px;max-width:840px">When equipment fails mid-service, everything stops</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px 56px">
+        <p style="font-size:17px;line-height:1.75;color:var(--muted);margin:0">Commercial kitchens are busy spaces, especially during a hard service. Everyone — from the chef and sous chef to the cooks and service staff — is focused on preparing food, plating meals and delivering within strict timelines.</p>
+        <p style="font-size:17px;line-height:1.75;color:var(--muted);margin:0">Imagine a usual busy day. The patrons are having a great time, the orders are pouring in, your team is busy fulfilling them. All of a sudden, an important piece of kitchen equipment fails — and everything comes to a standstill.</p>
+        <p style="font-size:17px;line-height:1.75;color:var(--muted);margin:0">That's the last thing you want during a busy service. It affects the efficiency of your kitchen, the quality of your service, and ultimately your revenue and brand reputation.</p>
+        <p style="font-size:17px;line-height:1.75;color:var(--muted);margin:0">That's where PT&amp;L Equipment Services helps. We provide professional, reliable commercial kitchen equipment servicing, maintenance and repairs across South East Melbourne.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section style="background:var(--red);padding:72px 56px">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="text-align:center;color:#fff;padding:0 20px;border-left:1px solid rgba(255,255,255,0.28)">
+          <div style="width:24px;height:3px;background:#fff;margin:0 auto 18px"></div>
+          <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:56px;line-height:1;letter-spacing:-0.03em">{{ s.num }}</div>
+          <div style="font-size:14px;color:#FFDEDC;margin-top:10px;letter-spacing:0.02em">{{ s.label }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section style="background:var(--navy);padding:140px 0;overflow:hidden">
+    <div style="max-width:1200px;margin:0 auto;padding:0 56px">
+      <div style="margin-bottom:56px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+          <span style="width:28px;height:2px;background:var(--red)"></span>
+          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">Testimonials</span>
+        </div>
+        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:46px;line-height:1.05;letter-spacing:-0.025em;color:#fff;margin:0 0 16px">What people say about us</h2>
+        <p style="font-size:18px;line-height:1.65;color:#AEB6E0;margin:0;max-width:680px">Your satisfaction is our number-one priority — which is why our customers always receive prompt, reliable service and the highest-quality workmanship.</p>
+      </div>
+    </div>
+    <div class="tmarq-wrap" style="overflow:hidden;width:100%">
+      <div class="tmarq-track">
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="6">
+          <div class="tcard">
+            <div style="color:var(--red);font-size:16px;letter-spacing:3px;margin-bottom:18px">★★★★★</div>
+            <p style="font-size:17px;line-height:1.6;color:#2A3450;margin:0 0 26px;min-height:110px">“{{ t.quote }}”</p>
+            <div style="border-top:1px solid var(--line);padding-top:20px">
+              <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--navy)">{{ t.name }}</div>
+              <div style="font-size:14px;color:var(--muted);margin-top:2px">{{ t.role }}</div>
+            </div>
+          </div>
+        </sc-for>
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="6">
+          <div class="tcard" aria-hidden="true">
+            <div style="color:var(--red);font-size:16px;letter-spacing:3px;margin-bottom:18px">★★★★★</div>
+            <p style="font-size:17px;line-height:1.6;color:#2A3450;margin:0 0 26px;min-height:110px">“{{ t.quote }}”</p>
+            <div style="border-top:1px solid var(--line);padding-top:20px">
+              <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--navy)">{{ t.name }}</div>
+              <div style="font-size:14px;color:var(--muted);margin-top:2px">{{ t.role }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" style="background:var(--mist);padding:152px 56px">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start">
+      <div>
+        <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:18px">Get in touch</div>
+        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:46px;line-height:1.06;letter-spacing:-0.02em;color:var(--navy);margin:0 0 20px">Let's get your kitchen running</h2>
+        <p style="font-size:18px;line-height:1.7;color:var(--muted);margin:0 0 40px;max-width:420px">Need a repair, a service or a quote? Get in touch and our team will respond promptly.</p>
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="3">
+            <div style="display:flex;align-items:flex-start;gap:16px">
+              <span style="width:46px;height:46px;border-radius:0;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;font-size:20px;flex:none;box-shadow:0 6px 16px rgba(14,28,109,0.08)">{{ c.icon }}</span>
+              <div>
+                <div style="font-size:13px;color:var(--muted)">{{ c.label }}</div>
+                <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:17px;color:var(--navy);margin-top:2px">{{ c.value }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:0;padding:44px;box-shadow:0 20px 50px rgba(14,28,109,0.08)">
+        <h3 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:24px;color:var(--navy);margin:0 0 24px">Request a quote</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+          <input placeholder="Your name" style="font-family:inherit;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none">
+          <input placeholder="Phone" style="font-family:inherit;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none">
+        </div>
+        <input placeholder="Email" style="font-family:inherit;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none;width:100%;margin-bottom:14px">
+        <select style="font-family:inherit;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none;width:100%;margin-bottom:14px;color:var(--muted)">
+          <option>Service required…</option>
+          <option>Combi oven repair</option>
+          <option>Cooktop / oven repair</option>
+          <option>Dishwasher repair</option>
+          <option>Preventative maintenance</option>
+          <option>Installation</option>
+        </select>
+        <textarea placeholder="Tell us about the issue" rows="4" style="font-family:inherit;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none;width:100%;margin-bottom:18px;resize:vertical"></textarea>
+        <button class="btn-red" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border:none;border-radius:2px;padding:16px;width:100%;cursor:pointer">Send Message</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background:#080D24;color:#9AA3C8">
+    <div style="border-top:3px solid var(--red)">
+      <div style="max-width:1200px;margin:0 auto;padding:66px 56px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.10)">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+            <span style="width:28px;height:2px;background:var(--red)"></span>
+            <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">Fast, reliable callouts</span>
+          </div>
+          <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:38px;line-height:1.05;letter-spacing:-0.025em;color:#fff;margin:0">Got a kitchen breakdown? Let's fix it.</h2>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a class="btn-red" href="tel:+61400184717" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:16px 28px;text-decoration:none;white-space:nowrap">Call +61 400 184 717</a>
+          <a class="btn-ghost" href="book.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:transparent;border:1.5px solid rgba(255,255,255,0.3);border-radius:2px;padding:14.5px 28px;text-decoration:none;white-space:nowrap">Book a Service</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.7fr 1fr 1fr 1.3fr;gap:48px;padding:84px 56px 44px">
+      <div>
+        <svg width="188" height="46" viewBox="0 0 178 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PT&amp;L Equipment Services" style="display:block;margin-bottom:22px"><text x="0" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">P</text><rect x="30" y="13" width="26" height="9" fill="#E0403B"></rect><rect x="38.5" y="4" width="9" height="34" fill="#E0403B"></rect><text x="56" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">L</text><text x="90" y="19" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">EQUIPMENT</text><text x="90" y="37" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">SERVICES</text></svg>
+        <p style="font-size:15px;line-height:1.7;margin:0 0 22px;max-width:300px">South East Melbourne's trusted specialists in commercial catering kitchen equipment service, repair and maintenance.</p>
+        <div style="display:flex;gap:10px">
+          <span class="fsoc" style="width:40px;height:40px;border-radius:0;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;cursor:pointer">{{ socFb }}</span>
+          <span class="fsoc" style="width:40px;height:40px;border-radius:0;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;cursor:pointer">{{ socYt }}</span>
+          <span class="fsoc" style="width:40px;height:40px;border-radius:0;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;cursor:pointer">{{ socIg }}</span>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px"><span style="width:18px;height:2px;background:var(--red)"></span><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:#fff">Navigate</span></div>
+        <div style="display:flex;flex-direction:column;gap:13px;font-size:15px">
+          <a class="flink" href="index.html" style="color:#9AA3C8;text-decoration:none">Home</a>
+          <a class="flink" href="about.html" style="color:#9AA3C8;text-decoration:none">About</a>
+          <a class="flink" href="services.html" style="color:#9AA3C8;text-decoration:none">Services</a>
+          <a class="flink" href="#areas" style="color:#9AA3C8;text-decoration:none">Areas</a>
+          <a class="flink" href="blog.html" style="color:#9AA3C8;text-decoration:none">Blog</a>
+          <a class="flink" href="contact.html" style="color:#9AA3C8;text-decoration:none">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px"><span style="width:18px;height:2px;background:var(--red)"></span><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:#fff">Services</span></div>
+        <div style="display:flex;flex-direction:column;gap:13px;font-size:15px">
+          <a class="flink" href="#services" style="color:#9AA3C8;text-decoration:none">Combi Oven Repairs</a>
+          <a class="flink" href="#services" style="color:#9AA3C8;text-decoration:none">Dishwasher Repairs</a>
+          <a class="flink" href="#services" style="color:#9AA3C8;text-decoration:none">Oven Maintenance</a>
+          <a class="flink" href="#services" style="color:#9AA3C8;text-decoration:none">Cooktop Servicing</a>
+          <a class="flink" href="#services" style="color:#9AA3C8;text-decoration:none">Fryer Maintenance</a>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px"><span style="width:18px;height:2px;background:var(--red)"></span><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:#fff">Contact</span></div>
+        <div style="display:flex;flex-direction:column;gap:13px;font-size:15px;line-height:1.5">
+          <span>Unit 2, 44 Princes Hwy,<br>Eumemmerring VIC 3177</span>
+          <a href="tel:+61400184717" style="color:#fff;text-decoration:none;font-weight:700">+61 400 184 717</a>
+          <a class="flink" href="mailto:service@ptlequipmentservices.com" style="color:#9AA3C8;text-decoration:none">service@ptlequipmentservices.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.08)">
+      <div style="max-width:1200px;margin:0 auto;padding:26px 56px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#5E68A0">
+        <span>© 2026 PT&amp;L Equipment Services. All Rights Reserved.</span>
+        <span>Servicing South East Melbourne, Brisbane &amp; surrounds</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  ic(name, size = 22) {
+    const P = {
+      check: '<polyline points="20 6 9 17 4 12"></polyline>',
+      arrow: '<path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>',
+      phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path>',
+      mail: '<rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>',
+      pin: '<path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle>',
+      wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>',
+      microwave: '<rect x="2" y="4" width="20" height="15" rx="2"></rect><rect x="5" y="7" width="10" height="9" rx="1"></rect><path d="M18 8v.01"></path><path d="M18 12v.01"></path>',
+      oven: '<rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M7 6h.01"></path><path d="M11 6h.01"></path><rect x="7" y="12" width="10" height="6" rx="1"></rect>',
+      cooktop: '<rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.6"></circle><circle cx="15.5" cy="8.5" r="1.6"></circle><circle cx="8.5" cy="15.5" r="1.6"></circle><circle cx="15.5" cy="15.5" r="1.6"></circle>',
+      fryer: '<path d="M3 11h18"></path><path d="M5 11v6a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-6"></path><path d="M8 11V8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"></path>',
+      dishwasher: '<rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M4 7h16"></path><path d="M8 4.5h.01"></path><circle cx="12" cy="14" r="4"></circle>',
+      fridge: '<rect x="5" y="2" width="14" height="20" rx="2"></rect><path d="M5 10h14"></path><path d="M9 6v1"></path><path d="M9 13v2"></path>',
+      calendar: '<rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path>',
+      clock: '<circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>',
+      shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path>',
+      facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>',
+      youtube: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>',
+      instagram: '<rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path>',
+    };
+    return React.createElement('svg', { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round', style: { display: 'block', flex: 'none' }, dangerouslySetInnerHTML: { __html: P[name] || '' } });
+  }
+  renderVals() {
+    return {
+      navServices: ['Equipment Repairs', 'Combi Oven Repairs', 'Dishwasher Repairs', 'Oven Maintenance', 'Cooktop Servicing', 'Fryer Maintenance'],
+      contacts: [
+        { icon: this.ic('phone', 20), label: 'Call us today', value: '+61 400 184 717' },
+        { icon: this.ic('mail', 20), label: 'Email', value: 'service@ptlequipmentservices.com' },
+        { icon: this.ic('pin', 20), label: 'Visit us', value: 'Unit 2, 44 Princes Hwy, Eumemmerring VIC 3177' },
+      ],
+      socFb: this.ic('facebook', 16), socYt: this.ic('youtube', 16), socIg: this.ic('instagram', 16),
+      arrowIcon: this.ic('arrow', 16),
+      services: [
+        { icon: this.ic('wrench', 28), title: 'Equipment Repairs', desc: 'On-site fault-finding and repairs for all brands of commercial catering and kitchen equipment.' },
+        { icon: this.ic('microwave', 28), title: 'Combi Oven Repairs', desc: 'Diagnostics, board & element replacement and recalibration for all major combi oven brands.' },
+        { icon: this.ic('dishwasher', 28), title: 'Dishwasher Repairs', desc: 'Commercial dishwashers and glasswashers diagnosed, repaired and descaled on site.' },
+        { icon: this.ic('oven', 28), title: 'Oven Maintenance', desc: 'Scheduled servicing for convection, deck and range ovens to keep them performing at their best.' },
+        { icon: this.ic('cooktop', 28), title: 'Cooktop Servicing', desc: 'Gas and electric cooktops and ranges serviced and repaired to keep your line moving.' },
+        { icon: this.ic('fryer', 28), title: 'Fryer Maintenance', desc: 'Deep fryer thermostats, elements and safety controls inspected, repaired and maintained.' },
+      ],
+      appliances: [
+        { icon: this.ic('oven', 18), name: 'Commercial Ovens' },
+        { icon: this.ic('cooktop', 18), name: 'Commercial Cooktops' },
+        { icon: this.ic('microwave', 18), name: 'Commercial Combi Ovens' },
+        { icon: this.ic('fryer', 18), name: 'Commercial Fryers' },
+        { icon: this.ic('dishwasher', 18), name: 'Commercial Dishwashers' },
+      ],
+      regions: [
+        { name: 'Victoria', suburbs: ['Melbourne CBD', 'Melbourne West', 'South Melbourne', 'South East Melbourne', 'North Melbourne', 'East Melbourne', 'Berwick', 'Brunswick', 'Carlton', 'Collingwood', 'Cranbourne', 'Docklands', 'Dandenong', 'Fitzroy', 'Gippsland', 'Kew', 'Glen Waverley', 'Narre Warren', 'Pakenham', 'St Kilda', 'Williamstown', 'Mulgrave', 'Noble Park', 'Keysborough', 'Springvale', 'Doveton', 'Balaclava', 'Chadstone', 'Elsternwick', 'Fountain Gate', 'Essendon', 'Hawthorn', 'Richmond', 'Ringwood', 'South Yarra', 'Prahran', 'Toorak', 'Wantirna', 'Hallam', 'Moorabbin', 'Highett', 'Bentleigh East', 'Clarinda'] },
+        { name: 'Queensland', suburbs: ['Brisbane', 'South Brisbane', 'East Brisbane', 'Brisbane Area', 'South Bank', 'Fortitude Valley', 'Gold Coast', 'Gold Coast Area', 'Sunshine Coast'] },
+      ],
+      maintenance: [
+        { icon: this.ic('calendar', 22), title: 'Scheduled Servicing', desc: 'Regular planned visits tailored to your equipment and how hard your kitchen runs it.' },
+        { icon: this.ic('clock', 22), title: 'Less Downtime', desc: 'Catch wear before it becomes a failure, so nothing fails in the middle of service.' },
+        { icon: this.ic('wrench', 22), title: 'All Brands', desc: 'Servicing and parts for all leading makes and models of commercial equipment.' },
+        { icon: this.ic('shield', 22), title: 'Warranty Backed', desc: 'All work is covered by warranty and carried out by fully insured technicians.' },
+      ],
+      stats: [
+        { num: '21+', label: 'Years experience' },
+        { num: '100%', label: 'Fully insured' },
+        { num: '24/7', label: 'Callout support' },
+        { num: '5★', label: 'Client rated' },
+      ],
+      testimonials: [
+        { quote: 'Good professional kitchen equipment service. Punctual, quality work and respectful of our space — exactly what a busy kitchen needs.', name: 'Mary Marina Nand', role: 'Hospitality' },
+        { quote: 'The team takes great pride in offering speedy and professional commercial appliance repair. Highly recommend.', name: 'David Rowlands', role: 'Hospitality' },
+        { quote: 'Our combi oven was back up and running the same day. Saved us from cancelling a fully booked service. Lifesavers.', name: 'James Whitfield', role: 'Restaurant Owner' },
+        { quote: 'Honest pricing, no surprises, and the technician explained everything clearly. We have them on speed dial now.', name: 'Priya Naidu', role: 'Café Manager' },
+        { quote: 'Reliable, on time and genuinely skilled. Our kitchen has never run more smoothly since switching to PT&L.', name: 'Marco Ferraro', role: 'Head Chef' },
+        { quote: 'Quick to respond, fair quotes and quality workmanship every visit. Exactly what a busy commercial kitchen needs.', name: 'Sarah Linton', role: 'Venue Operations' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

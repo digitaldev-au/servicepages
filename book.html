@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="#0E1C6D"/><text x="200" y="240" font-family="Archivo,Arial,sans-serif" font-weight="800" font-style="italic" font-size="130" fill="#ffffff" text-anchor="middle">P<tspan fill="#E0403B">+</tspan>L</text></svg></template>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+  <style>
+    :root{--navy:#0E1C6D;--red:#E0403B;--ink:#1A2030;--muted:#6A7186;--line:#ECEEF2;--mist:#F7F8FA}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:#fff}
+    ::selection{background:#E0403B;color:#fff}
+    .navlink{transition:color .2s}
+    .navlink:hover{color:var(--red) !important}
+    .btn-red{transition:background .2s,transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+    .btn-red:hover{background:#C8332E !important;transform:translateY(-3px);box-shadow:0 14px 28px rgba(224,64,59,0.34)}
+    .btn-red:active{transform:translateY(-1px);box-shadow:0 6px 14px rgba(224,64,59,0.30)}
+    .btn-navy{transition:background .2s,transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+    .btn-navy:hover{background:#182A9E !important;transform:translateY(-3px);box-shadow:0 14px 28px rgba(14,28,109,0.30)}
+    .btn-navy:active{transform:translateY(-1px);box-shadow:0 6px 14px rgba(14,28,109,0.26)}
+    .btn-outline{transition:background .25s,color .25s,border-color .25s,transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+    .btn-outline:hover{background:var(--navy) !important;color:#fff !important;border-color:var(--navy) !important;transform:translateY(-3px);box-shadow:0 14px 28px rgba(14,28,109,0.20)}
+    .btn-outline:active{transform:translateY(-1px)}
+    .btn-ghost{transition:background .25s,color .25s,border-color .25s,transform .25s cubic-bezier(.2,.7,.3,1)}
+    .btn-ghost:hover{background:#fff !important;color:var(--navy) !important;border-color:#fff !important;transform:translateY(-3px)}
+    .btn-ghost:active{transform:translateY(-1px)}
+    .nav-dd{position:relative}
+    .nav-dd-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:240px;background:#fff;border:1px solid var(--line);border-radius:0;box-shadow:0 22px 50px rgba(14,28,109,0.14);padding:8px;opacity:0;visibility:hidden;transition:opacity .2s,transform .2s;z-index:70}
+    .nav-dd:hover .nav-dd-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(2px)}
+    .nav-dd-menu::before{content:'';position:absolute;top:-14px;left:0;right:0;height:14px}
+    .nav-dd-item{display:block;padding:11px 14px;border-radius:2px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:14.5px;color:#4A5268;text-decoration:none;transition:background .15s,color .15s;white-space:nowrap}
+    .nav-dd-item:hover{background:var(--mist);color:var(--red)}
+    .nav-caret{display:inline-block;margin-left:5px;font-size:10px;transition:transform .2s}
+    .nav-dd:hover .nav-caret{transform:rotate(180deg)}
+    .bk-input{font-family:'Hanken Grotesk',sans-serif;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none;width:100%;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+    .bk-input::placeholder{color:#9AA1B3}
+    .bk-input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(14,28,109,0.08)}
+    .bk-seg{font-family:'Hanken Grotesk',sans-serif;font-size:15px;padding:14px 12px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none;color:var(--ink);text-align:center;transition:border-color .2s,box-shadow .2s}
+    .bk-seg:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(14,28,109,0.08)}
+    .tmarq-track-wrap{overflow:hidden;width:100%}
+    @keyframes tmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .tmarq-track{display:flex;gap:24px;width:max-content;animation:tmarq 48s linear infinite}
+    .tmarq-wrap:hover .tmarq-track{animation-play-state:paused}
+    .tcard{flex:none;width:430px;background:#fff;padding:40px;border-top:3px solid var(--red)}
+    .flink{transition:color .2s}
+    .flink:hover{color:#fff !important}
+    .fsoc{transition:background .2s,color .2s}
+    .fsoc:hover{background:var(--red) !important;color:#fff !important}
+  </style>
+</helmet>
+
+<div style="font-family:'Hanken Grotesk',sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden">
+
+  <!-- ===== HEADER ===== -->
+  <header style="background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60">
+    <div style="max-width:1200px;margin:0 auto;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="index.html"><img src="assets/ptl-logo-dark.png" alt="PT&amp;L Equipment Services" style="height:42px;display:block"></a>
+      <nav style="display:flex;align-items:center;gap:36px;font-family:'Archivo',sans-serif;font-weight:600;font-size:15px">
+        <a class="navlink" href="index.html" style="color:#4A5268;text-decoration:none">Home</a>
+        <a class="navlink" href="about.html" style="color:#4A5268;text-decoration:none">About</a>
+        <span class="nav-dd" style="display:inline-flex;align-items:center">
+          <a class="navlink" href="services.html" style="color:#4A5268;text-decoration:none">Services<span class="nav-caret">▾</span></a>
+          <span class="nav-dd-menu">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
+              <a class="nav-dd-item" href="services.html">{{ s }}</a>
+            </sc-for>
+          </span>
+        </span>
+        <span class="nav-dd" style="display:inline-flex;align-items:center">
+          <a class="navlink" href="areas.html" style="color:#4A5268;text-decoration:none">Areas<span class="nav-caret">▾</span></a>
+          <span class="nav-dd-menu">
+            <a class="nav-dd-item" href="melbourne-west.html">Melbourne West</a>
+          </span>
+        </span>
+        <a class="navlink" href="contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
+        <a class="navlink" href="book.html" style="color:var(--navy);text-decoration:none">Book</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:22px">
+        <a href="tel:+61400184717" style="text-decoration:none;line-height:1.15;text-align:right">
+          <span style="display:block;font-size:12px;color:var(--muted)">Get a quote today</span>
+          <span style="display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--navy);white-space:nowrap">+61 400 184 717</span>
+        </a>
+        <a class="btn-red" href="#form" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--red);border-radius:2px;padding:13px 24px;text-decoration:none;white-space:nowrap">Book a Service</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section style="position:relative;background:var(--navy);overflow:hidden;padding:96px 56px 104px">
+    <div style="position:absolute;inset:0;background:url('uploads/professional-kitchen-repairs.jpg') center/cover;opacity:0.2;z-index:0"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(100deg,var(--navy) 32%,rgba(14,28,109,0.55) 100%);z-index:1"></div>
+    <div style="position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--red);z-index:3"></div>
+    <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:var(--red);clip-path:polygon(100% 0,100% 100%,0 0);z-index:2;opacity:0.9"></div>
+    <div style="max-width:1200px;margin:0 auto;position:relative;z-index:2">
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-size:14px;color:#AEB6E0;margin-bottom:24px">
+        <a href="index.html" style="color:#AEB6E0;text-decoration:none">Home</a>
+        <span style="margin:0 10px;color:#5E68A0">/</span>
+        <span style="color:#fff">Book a Service</span>
+      </div>
+      <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px;margin-bottom:24px">Get a quote today</span>
+      <h1 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:56px;line-height:1.04;letter-spacing:-0.03em;color:#fff;margin:0;max-width:880px">Book a <span style="text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:7px;text-underline-offset:6px">service</span> for your commercial kitchen</h1>
+      <p style="font-size:19px;line-height:1.6;color:#AEB6E0;margin:26px 0 0;max-width:640px">Tell us about your venue and the equipment that needs attention. We'll confirm your booking and get a qualified technician on the way.</p>
+    </div>
+  </section>
+
+  <!-- ===== INTRO + BOOKING FORM ===== -->
+  <section id="form" style="background:var(--mist);padding:120px 56px">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:0.82fr 1.18fr;gap:64px;align-items:start">
+
+      <!-- Left intro / assurances -->
+      <div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+          <span style="width:28px;height:2px;background:var(--red)"></span>
+          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:var(--red)">Booking</span>
+        </div>
+        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:38px;line-height:1.1;letter-spacing:-0.02em;color:var(--navy);margin:0 0 20px">Book a Service</h2>
+        <p style="font-size:17px;line-height:1.7;color:var(--muted);margin:0 0 32px">Please fill out the booking form and our team will be in touch to confirm a time. Prefer to talk it through? Call us on <a href="tel:+61400184717" style="color:var(--navy);font-weight:600;text-decoration:none">0400 184 717</a> and we'll book you in.</p>
+
+        <div style="border-top:1px solid var(--line);padding-top:30px;display:flex;flex-direction:column;gap:22px">
+          <sc-for list="{{ assurances }}" as="a" hint-placeholder-count="4">
+            <div style="display:flex;align-items:flex-start;gap:16px">
+              <span style="width:46px;height:46px;border-radius:0;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 6px 16px rgba(14,28,109,0.08)">{{ a.icon }}</span>
+              <div>
+                <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--navy)">{{ a.title }}</div>
+                <div style="font-size:14.5px;line-height:1.55;color:var(--muted);margin-top:3px">{{ a.desc }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:34px;background:var(--navy);border-left:5px solid var(--red);padding:26px 28px">
+          <div style="font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#AEB6E0;font-family:'Archivo',sans-serif;font-weight:700">Get a quote today</div>
+          <a href="tel:+61400184717" style="display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;color:#fff;text-decoration:none;margin-top:6px">+61 400 184 717</a>
+        </div>
+      </div>
+
+      <!-- Right form card -->
+      <div style="background:#fff;border:1px solid var(--line);border-radius:0;padding:48px;box-shadow:0 24px 60px rgba(14,28,109,0.10);border-top:4px solid var(--red)">
+        <h3 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:24px;color:var(--navy);margin:0 0 6px">Booking form</h3>
+        <p style="font-size:15px;color:var(--muted);margin:0 0 30px">Please fill out the booking form below. Fields marked <span style="color:var(--red)">*</span> are required.</p>
+
+        <!-- Row: Venue / Address -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Venue / Business Name <span style="color:var(--red)">*</span></label>
+            <input class="bk-input" placeholder="Venue / Business Name">
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Address <span style="color:var(--red)">*</span></label>
+            <input class="bk-input" placeholder="Address">
+          </div>
+        </div>
+
+        <!-- Row: Contact name / phone -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Contact Name <span style="color:var(--red)">*</span></label>
+            <input class="bk-input" placeholder="Contact Name">
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Contact Phone <span style="color:var(--red)">*</span></label>
+            <input class="bk-input" placeholder="Contact Phone" inputmode="tel">
+          </div>
+        </div>
+
+        <!-- Row: Email / Service type -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Email Address <span style="color:var(--red)">*</span></label>
+            <input class="bk-input" placeholder="Email Address" inputmode="email">
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Service Type <span style="color:var(--red)">*</span></label>
+            <select class="bk-input" value="{{ serviceType }}" onChange="{{ onServiceType }}" style="color:{{ serviceTypeColor }};appearance:auto">
+              <option value="">Please Select</option>
+              <sc-for list="{{ serviceTypes }}" as="st" hint-placeholder-count="6">
+                <option value="{{ st }}">{{ st }}</option>
+              </sc-for>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row: Appliance model / serial -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Appliance Model <span style="color:var(--red)">*</span></label>
+            <input class="bk-input" placeholder="Appliance Model">
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Appliance Serial Number <span style="color:var(--red)">*</span></label>
+            <input class="bk-input" placeholder="Appliance Serial Number">
+          </div>
+        </div>
+
+        <!-- Job details -->
+        <div style="margin-bottom:18px">
+          <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Job Details</label>
+          <textarea class="bk-input" rows="4" placeholder="Provide a brief description of the unit and the issue / fault (e.g. not heating, or an error code)" style="resize:vertical"></textarea>
+        </div>
+
+        <!-- Row: Preferred date / time -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:30px">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Preferred Date <span style="color:var(--red)">*</span></label>
+            <div style="display:flex;gap:8px">
+              <input class="bk-seg" placeholder="DD" inputmode="numeric" maxlength="2" style="width:60px">
+              <span style="align-self:center;color:#C4CAD6;font-weight:700">/</span>
+              <input class="bk-seg" placeholder="MM" inputmode="numeric" maxlength="2" style="width:60px">
+              <span style="align-self:center;color:#C4CAD6;font-weight:700">/</span>
+              <input class="bk-seg" placeholder="YYYY" inputmode="numeric" maxlength="4" style="flex:1">
+            </div>
+            <div style="font-size:12px;color:#9AA1B3;margin-top:6px">dd / mm / yyyy</div>
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Preferred Time <span style="color:var(--red)">*</span></label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input class="bk-seg" placeholder="HH" inputmode="numeric" maxlength="2" style="width:58px">
+              <span style="color:#C4CAD6;font-weight:700">:</span>
+              <input class="bk-seg" placeholder="MM" inputmode="numeric" maxlength="2" style="width:58px">
+              <select class="bk-seg" style="appearance:auto;padding:14px 8px;flex:1">
+                <option>AM</option>
+                <option>PM</option>
+              </select>
+            </div>
+            <div style="font-size:12px;color:#9AA1B3;margin-top:6px">Hours : Minutes — AM / PM</div>
+          </div>
+        </div>
+
+        <button class="btn-red" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border:none;border-radius:2px;padding:17px;width:100%;cursor:pointer">Submit Booking</button>
+        <p style="font-size:13px;color:var(--muted);text-align:center;margin:16px 0 0">We'll respond within 24 hours to confirm your appointment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section style="background:var(--navy);padding:140px 0;overflow:hidden">
+    <div style="max-width:1200px;margin:0 auto;padding:0 56px">
+      <div style="margin-bottom:56px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+          <span style="width:28px;height:2px;background:var(--red)"></span>
+          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">Testimonials</span>
+        </div>
+        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:46px;line-height:1.05;letter-spacing:-0.025em;color:#fff;margin:0 0 16px">What people say about us</h2>
+        <p style="font-size:18px;line-height:1.65;color:#AEB6E0;margin:0;max-width:680px">Your satisfaction is our number-one priority — that is why we are dedicated to ensuring our customers always receive prompt, reliable service and the highest-quality workmanship.</p>
+      </div>
+    </div>
+    <div class="tmarq-wrap" style="overflow:hidden;width:100%">
+      <div class="tmarq-track">
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="6">
+          <div class="tcard">
+            <div style="color:var(--red);font-size:16px;letter-spacing:3px;margin-bottom:18px">★★★★★</div>
+            <p style="font-size:17px;line-height:1.6;color:#2A3450;margin:0 0 26px;min-height:110px">“{{ t.quote }}”</p>
+            <div style="border-top:1px solid var(--line);padding-top:20px">
+              <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--navy)">{{ t.name }}</div>
+              <div style="font-size:14px;color:var(--muted);margin-top:2px">{{ t.role }}</div>
+            </div>
+          </div>
+        </sc-for>
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="6">
+          <div class="tcard" aria-hidden="true">
+            <div style="color:var(--red);font-size:16px;letter-spacing:3px;margin-bottom:18px">★★★★★</div>
+            <p style="font-size:17px;line-height:1.6;color:#2A3450;margin:0 0 26px;min-height:110px">“{{ t.quote }}”</p>
+            <div style="border-top:1px solid var(--line);padding-top:20px">
+              <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--navy)">{{ t.name }}</div>
+              <div style="font-size:14px;color:var(--muted);margin-top:2px">{{ t.role }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background:#080D24;color:#9AA3C8">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.7fr 1fr 1fr 1.3fr;gap:48px;padding:84px 56px 44px;border-top:3px solid var(--red)">
+      <div>
+        <svg width="188" height="46" viewBox="0 0 178 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PT&amp;L Equipment Services" style="display:block;margin-bottom:22px"><text x="0" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">P</text><rect x="30" y="13" width="26" height="9" fill="#E0403B"></rect><rect x="38.5" y="4" width="9" height="34" fill="#E0403B"></rect><text x="56" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">L</text><text x="90" y="19" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">EQUIPMENT</text><text x="90" y="37" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">SERVICES</text></svg>
+        <p style="font-size:15px;line-height:1.7;margin:0 0 22px;max-width:300px">South East Melbourne's trusted specialists in commercial catering kitchen equipment service, repair and maintenance.</p>
+        <div style="display:flex;gap:10px">
+          <span class="fsoc" style="width:40px;height:40px;border-radius:0;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;cursor:pointer">{{ socFb }}</span>
+          <span class="fsoc" style="width:40px;height:40px;border-radius:0;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;cursor:pointer">{{ socYt }}</span>
+          <span class="fsoc" style="width:40px;height:40px;border-radius:0;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;cursor:pointer">{{ socIg }}</span>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px"><span style="width:18px;height:2px;background:var(--red)"></span><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:#fff">Navigate</span></div>
+        <div style="display:flex;flex-direction:column;gap:13px;font-size:15px">
+          <a class="flink" href="index.html" style="color:#9AA3C8;text-decoration:none">Home</a>
+          <a class="flink" href="about.html" style="color:#9AA3C8;text-decoration:none">About</a>
+          <a class="flink" href="services.html" style="color:#9AA3C8;text-decoration:none">Services</a>
+          <a class="flink" href="services.html#areas" style="color:#9AA3C8;text-decoration:none">Areas</a>
+          <a class="flink" href="blog.html" style="color:#9AA3C8;text-decoration:none">Blog</a>
+          <a class="flink" href="book.html" style="color:#9AA3C8;text-decoration:none">Book a Service</a>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px"><span style="width:18px;height:2px;background:var(--red)"></span><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:#fff">Services</span></div>
+        <div style="display:flex;flex-direction:column;gap:13px;font-size:15px">
+          <a class="flink" href="services.html" style="color:#9AA3C8;text-decoration:none">Combi Oven Repairs</a>
+          <a class="flink" href="services.html" style="color:#9AA3C8;text-decoration:none">Cooktop &amp; Oven Repairs</a>
+          <a class="flink" href="services.html" style="color:#9AA3C8;text-decoration:none">Dishwasher Repairs</a>
+          <a class="flink" href="services.html" style="color:#9AA3C8;text-decoration:none">Maintenance</a>
+          <a class="flink" href="services.html" style="color:#9AA3C8;text-decoration:none">Installation</a>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px"><span style="width:18px;height:2px;background:var(--red)"></span><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:#fff">Contact</span></div>
+        <div style="display:flex;flex-direction:column;gap:13px;font-size:15px;line-height:1.5">
+          <span>Unit 2, 44 Princes Hwy,<br>Eumemmerring VIC 3177</span>
+          <a href="tel:+61400184717" style="color:#fff;text-decoration:none;font-weight:700">+61 400 184 717</a>
+          <a class="flink" href="mailto:service@ptlequipmentservices.com" style="color:#9AA3C8;text-decoration:none">service@ptlequipmentservices.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.08)">
+      <div style="max-width:1200px;margin:0 auto;padding:26px 56px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#5E68A0">
+        <span>© 2026 PT&amp;L Equipment Services. All Rights Reserved.</span>
+        <span>Servicing South East Melbourne &amp; surrounds</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { serviceType: '' };
+  ic(name, size = 22) {
+    const P = {
+      calendar: '<rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path>',
+      clock: '<circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>',
+      shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path>',
+      wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>',
+      facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>',
+      youtube: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>',
+      instagram: '<rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path>',
+    };
+    return React.createElement('svg', { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round', style: { display: 'block', flex: 'none' }, dangerouslySetInnerHTML: { __html: P[name] || '' } });
+  }
+  renderVals() {
+    return {
+      services: ['Equipment Repairs', 'Combi Oven Repairs', 'Dishwasher Repairs', 'Oven Maintenance', 'Cooktop Servicing', 'Fryer Maintenance'],
+      serviceTypes: ['Equipment Repair', 'Combi Oven Repair', 'Dishwasher Repair', 'Oven Maintenance', 'Cooktop Servicing', 'Fryer Maintenance', 'Planned Maintenance', 'Installation'],
+      serviceType: this.state.serviceType,
+      serviceTypeColor: this.state.serviceType ? '#1A2030' : '#9AA1B3',
+      onServiceType: (e) => this.setState({ serviceType: e.target.value }),
+      socFb: this.ic('facebook', 16), socYt: this.ic('youtube', 16), socIg: this.ic('instagram', 16),
+      assurances: [
+        { icon: this.ic('clock', 20), title: 'Fast response', desc: 'We aim to confirm every booking within 24 hours, with same-day callouts where we can.' },
+        { icon: this.ic('wrench', 20), title: 'All makes & models', desc: 'Fully qualified technicians service and repair every leading brand on site.' },
+        { icon: this.ic('shield', 20), title: 'Warranty backed', desc: 'All work is carried out by fully insured technicians and covered by warranty.' },
+        { icon: this.ic('calendar', 20), title: 'Flexible scheduling', desc: 'Pick a preferred date and time and we will work around your service hours.' },
+      ],
+      testimonials: [
+        { quote: 'Good professional kitchen equipment service. Punctual, quality work and respectful of our space — exactly what a busy kitchen needs.', name: 'Mary Marina Nand', role: 'Hospitality' },
+        { quote: 'The team takes great pride in offering speedy and professional commercial appliance repair. Highly recommend.', name: 'David Rowlands', role: 'Hospitality' },
+        { quote: 'Our combi oven was back up and running the same day. Saved us from cancelling a fully booked service. Lifesavers.', name: 'James Whitfield', role: 'Restaurant Owner' },
+        { quote: 'Honest pricing, no surprises, and the technician explained everything clearly. We have them on speed dial now.', name: 'Priya Naidu', role: 'Café Manager' },
+        { quote: 'Reliable, on time and genuinely skilled. Our kitchen has never run more smoothly since switching to PT&L.', name: 'Marco Ferraro', role: 'Head Chef' },
+        { quote: 'Quick to respond, fair quotes and quality workmanship every visit. Exactly what a busy commercial kitchen needs.', name: 'Sarah Linton', role: 'Venue Operations' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
