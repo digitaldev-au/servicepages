@@ -40,14 +40,17 @@
     .nav-dd-item:hover{background:var(--mist);color:var(--red)}
     .nav-caret{display:inline-block;margin-left:5px;font-size:10px;transition:transform .2s}
     .nav-dd:hover .nav-caret{transform:rotate(180deg)}
-    .ct-card{transition:transform .3s,box-shadow .3s,border-color .3s}
-    .ct-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(14,28,109,0.10);border-color:var(--navy) !important}
+    .area-card{transition:box-shadow .3s,transform .3s,border-color .3s}
+    .area-card:hover{box-shadow:0 26px 56px rgba(14,28,109,0.14);transform:translateY(-6px);border-color:var(--navy) !important}
+    .area-card:hover .area-tile{background:var(--red) !important}
+    .area-card:hover .area-arrow{transform:translateX(7px)}
+    .area-arrow{display:inline-block;transition:transform .3s}
+    .area-chip{transition:color .2s,border-color .2s,background .2s}
+    .area-chip:hover{color:var(--red) !important;border-color:var(--red) !important;background:#fff !important}
     .flink{transition:color .2s}
     .flink:hover{color:#fff !important}
     .fsoc{transition:background .2s,color .2s}
     .fsoc:hover{background:var(--red) !important;color:#fff !important}
-    .map-pin-pulse{animation:mpp 2.4s ease-out infinite}
-    @keyframes mpp{0%{transform:scale(1);opacity:.55}70%{transform:scale(2.6);opacity:0}100%{opacity:0}}
   
     /* ===== mobile (injected) ===== */
     .ptl-burger{display:none;align-items:center;justify-content:center;width:46px;height:46px;border:1.5px solid #D6DAE4;border-radius:2px;background:#fff;cursor:pointer;flex:none}
@@ -56,6 +59,22 @@
     .ptl-drawer a{color:#4A5268;text-decoration:none;padding:15px 2px;border-bottom:1px solid var(--mist);transition:color .2s}
     .ptl-drawer a:hover{color:var(--red) !important}
     #ptl-mnav:checked ~ .ptl-drawer{display:flex}
+    /* ===== transparent header merged into hero ===== */
+    [data-ptl-header]{border-bottom:none!important;box-shadow:none;position:fixed!important;top:0;left:0;right:0}
+    body[data-ptl-scrolled] [data-ptl-header]{background:var(--navy)!important;box-shadow:0 12px 34px rgba(7,11,31,0.30)!important}
+    [data-ptl-header]:has(#ptl-mnav:checked){background:var(--navy)!important;box-shadow:0 12px 34px rgba(7,11,31,0.30)!important}
+    [data-ptl-header] .navlink{color:rgba(255,255,255,0.82)!important}
+    [data-ptl-header] .navlink:hover{color:#fff!important}
+    [data-ptl-header] .navlink[style*="--navy"]{color:#fff!important;text-decoration:underline!important;text-decoration-color:var(--red)!important;text-decoration-thickness:2px;text-underline-offset:8px}
+    [data-ptl-header] .nav-caret{color:rgba(255,255,255,0.72)}
+    [data-ptl-header] .ptl-hdr-phone span:first-child{color:rgba(255,255,255,0.58)!important}
+    [data-ptl-header] .ptl-hdr-phone span:last-child{color:#fff!important}
+    [data-ptl-header] .ptl-burger{background:transparent!important;border-color:rgba(255,255,255,0.5)!important}
+    [data-ptl-header] .ptl-burger svg{stroke:#fff!important}
+    [data-ptl-hero][style]{padding-top:152px!important}
+    [data-ptl-hero-c][style]{padding-top:88px!important}
+    @media (max-width:980px){[data-ptl-hero][style]{padding-top:132px!important}}
+    @media (max-width:640px){[data-ptl-hero][style]{padding-top:124px!important}}
     @media (max-width:980px){
       .ptl-nav-desktop,.ptl-hdr-phone{display:none !important}
       .ptl-burger{display:flex !important}
@@ -90,153 +109,108 @@
     @media (max-width:860px){.ft-grid{grid-template-columns:1fr !important;gap:48px !important}.ft-form-grid{grid-template-columns:1fr !important}}
 
   </style>
+  <script>
+    (function(){
+      function upd(){
+        try{
+          if(window.scrollY>24){document.body.setAttribute('data-ptl-scrolled','');}
+          else{document.body.removeAttribute('data-ptl-scrolled');}
+        }catch(e){}
+      }
+      window.addEventListener('scroll',upd,{passive:true});
+      window.addEventListener('resize',upd,{passive:true});
+      window.addEventListener('load',upd);
+      document.addEventListener('DOMContentLoaded',upd);
+      setTimeout(upd,50);setTimeout(upd,300);setTimeout(upd,1200);
+    })();
+  </script>
 </helmet>
 
 <div style="font-family:'Hanken Grotesk',sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden">
 
   <!-- ===== HEADER ===== -->
-  <header style="background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60">
+  <header data-ptl-header style="background:linear-gradient(180deg,rgba(6,10,28,0.46) 0%,rgba(6,10,28,0.13) 62%,rgba(6,10,28,0) 100%);border-bottom:none;position:fixed;top:0;left:0;right:0;z-index:60;transition:background .32s ease,box-shadow .32s ease">
     <div style="max-width:1200px;margin:0 auto;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="index.html"><img src="assets/ptl-logo-dark.png" alt="PT&amp;L Equipment Services" style="height:42px;display:block"></a>
+      <a href="index.html" aria-label="PT&amp;L Equipment Services — home" style="display:block"><svg width="170" height="42" viewBox="0 0 178 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PT&amp;L Equipment Services" style="display:block"><text x="0" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">P</text><rect x="30" y="13" width="26" height="9" fill="#E0403B"></rect><rect x="38.5" y="4" width="9" height="34" fill="#E0403B"></rect><text x="56" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">L</text><text x="90" y="19" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">EQUIPMENT</text><text x="90" y="37" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">SERVICES</text></svg></a>
       <nav class="ptl-nav-desktop" style="display:flex;align-items:center;gap:36px;font-family:'Archivo',sans-serif;font-weight:600;font-size:15px">
         <a class="navlink" href="index.html" style="color:#4A5268;text-decoration:none">Home</a>
-        <a class="navlink" href="About.html" style="color:#4A5268;text-decoration:none">About</a>
+        <a class="navlink" href="about.html" style="color:#4A5268;text-decoration:none">About</a>
         <span class="nav-dd" style="display:inline-flex;align-items:center">
-          <a class="navlink" href="Services.html" style="color:#4A5268;text-decoration:none">Services<span class="nav-caret">▾</span></a>
+          <a class="navlink" href="services.html" style="color:#4A5268;text-decoration:none">Services<span class="nav-caret">▾</span></a>
           <span class="nav-dd-menu">
             <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
-              <a class="nav-dd-item" href="Services.html">{{ s }}</a>
+              <a class="nav-dd-item" href="services.html">{{ s }}</a>
             </sc-for>
           </span>
         </span>
         <span class="nav-dd" style="display:inline-flex;align-items:center">
-          <a class="navlink" href="Areas.html" style="color:#4A5268;text-decoration:none">Areas<span class="nav-caret">▾</span></a>
+          <a class="navlink" href="areas.html" style="color:var(--navy);text-decoration:none">Areas<span class="nav-caret">▾</span></a>
           <span class="nav-dd-menu">
-            <a class="nav-dd-item" href="Area-Melbourne-West.html">Melbourne West</a>
-            <a class="nav-dd-item" href="Area-Hallam.html">Hallam</a>
+            <sc-for list="{{ areaPages }}" as="a" hint-placeholder-count="2">
+              <a class="nav-dd-item" href="{{ a.href }}">{{ a.name }}</a>
+            </sc-for>
           </span>
         </span>
-        <a class="navlink" href="Contact.html" style="color:var(--navy);text-decoration:none">Contact</a>
-        <a class="navlink" href="Book.html" style="color:#4A5268;text-decoration:none">Book</a>
+        <a class="navlink" href="contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
+        <a class="navlink" href="book.html" style="color:#4A5268;text-decoration:none">Book</a>
       </nav>
       <div style="display:flex;align-items:center;gap:22px">
         <a class="ptl-hdr-phone" href="tel:+61400184717" style="text-decoration:none;line-height:1.15;text-align:right">
           <span style="display:block;font-size:12px;color:var(--muted)">Call us today</span>
           <span style="display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--navy);white-space:nowrap">+61 400 184 717</span>
         </a>
-        <a class="btn-red" href="#form" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--red);border-radius:2px;padding:13px 24px;text-decoration:none;white-space:nowrap">Get a Quote</a>
+        <a class="btn-red" href="book.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--red);border-radius:2px;padding:13px 24px;text-decoration:none;white-space:nowrap">Book a Service</a>
         <label for="ptl-mnav" class="ptl-burger" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E1C6D" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></label>
       </div>
     </div>
     <input type="checkbox" id="ptl-mnav" class="ptl-mnav-cb" aria-hidden="true">
     <div class="ptl-drawer">
       <a href="index.html">Home</a>
-      <a href="About.html">About</a>
-      <a href="Services.html">Services</a>
-      <a href="Area-Melbourne-West.html">Areas — Melbourne West</a>
-      <a href="Area-Hallam.html">Areas — Hallam</a>
-      <a href="Contact.html">Contact</a>
-      <a href="Book.html">Book</a>
-      <a class="btn-red" href="Contact.html" style="color:#fff;background:var(--red);border-radius:2px;padding:15px;text-decoration:none;text-align:center;font-weight:700;margin-top:16px;border-bottom:none">Get a Quote</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="melbourne-west.html">Areas — Melbourne West</a>
+      <a href="hallam.html">Areas — Hallam</a>
+      <a href="contact.html">Contact</a>
+      <a href="book.html">Book</a>
+      <a class="btn-red" href="contact.html" style="color:#fff;background:var(--red);border-radius:2px;padding:15px;text-decoration:none;text-align:center;font-weight:700;margin-top:16px;border-bottom:none">Get a Quote</a>
       <a href="tel:+61400184717" style="color:var(--navy);text-align:center;padding:14px;font-weight:800;font-size:18px;border-bottom:none">+61 400 184 717</a>
     </div>
   </header>
 
   <!-- ===== PAGE HERO ===== -->
-  <section style="position:relative;background:var(--navy);overflow:hidden;padding:96px 56px 104px">
-    <div style="position:absolute;inset:0;background:url('uploads/equipment-repair.jpg') center/cover;opacity:0.2;z-index:0"></div>
-    <div style="position:absolute;inset:0;background:linear-gradient(100deg,var(--navy) 32%,rgba(14,28,109,0.55) 100%);z-index:1"></div>
+  <section style="position:relative;background:var(--navy);overflow:hidden;padding:96px 56px 104px" data-ptl-hero>
+    <image-slot id="areas-hero" src="uploads/Kitchen-Equipment-Repairs-South-East-Melbourne.jpg" fit="cover" radius="0" placeholder="Drop a hero photo" style="position:absolute;inset:0;width:100%;height:100%;z-index:0"></image-slot>
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.15);z-index:1"></div>
     <div style="max-width:1200px;margin:0 auto;position:relative;z-index:2">
-      <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px;margin-bottom:24px">Get in touch</span>
-      <h1 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:56px;line-height:1.04;letter-spacing:-0.03em;color:#fff;margin:0;max-width:880px">Service, repairs &amp; installation — let's <span style="text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:7px;text-underline-offset:6px">talk</span></h1>
-      <p style="font-size:19px;line-height:1.6;color:#AEB6E0;margin:26px 0 0;max-width:640px">Commercial kitchen equipment service, repair and maintenance across South East Melbourne. Our licensed technicians can fix most repairs on-site.</p>
+      <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px;margin-bottom:24px">Areas we service</span>
+      <h1 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:56px;line-height:1.04;letter-spacing:-0.03em;color:#fff;margin:0;max-width:900px">Commercial appliance repairs across <span style="text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:7px;text-underline-offset:6px">Victoria &amp; Queensland</span></h1>
+      <p style="font-size:19px;line-height:1.6;color:#AEB6E0;margin:26px 0 0;max-width:680px">Mobile technicians servicing South East Melbourne, Melbourne West and Brisbane. Call us — we likely cover your suburb.</p>
     </div>
   </section>
 
-  <!-- ===== QUICK CONTACT BAR ===== -->
-  <section style="background:var(--mist);border-bottom:1px solid var(--line);padding:0 56px">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)">
-      <sc-for list="{{ quick }}" as="q" hint-placeholder-count="4">
-        <a href="{{ q.href }}" style="display:flex;align-items:center;gap:16px;padding:30px 24px;text-decoration:none;border-left:1px solid var(--line)">
-          <span style="width:46px;height:46px;border-radius:0;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 6px 16px rgba(14,28,109,0.08)">{{ q.icon }}</span>
-          <span>
-            <span style="display:block;font-size:12px;color:var(--muted)">{{ q.label }}</span>
-            <span style="display:block;font-family:'Archivo',sans-serif;font-weight:700;font-size:15.5px;color:var(--navy);margin-top:2px">{{ q.value }}</span>
-          </span>
-        </a>
-      </sc-for>
-    </div>
-  </section>
-
-  <!-- ===== INTRO + FORM ===== -->
-  <section id="form" style="background:#fff;padding:120px 56px">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
-      <div>
+  <!-- ===== COVERAGE BY REGION ===== -->
+  <section style="background:var(--mist);padding:120px 56px">
+    <div style="max-width:1200px;margin:0 auto">
+      <div style="max-width:720px;margin-bottom:52px">
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
-          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">Contact us</span>
+          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">Suburb coverage</span>
         </div>
-        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:38px;line-height:1.1;letter-spacing:-0.02em;color:var(--navy);margin:0 0 24px">Service, repairs &amp; installation — fixed right the first time</h2>
-        <p style="font-size:17px;line-height:1.7;color:var(--muted);margin:0 0 18px">Contact PT&amp;L Equipment Services for reliable repair, servicing and maintenance of commercial kitchen equipment in South East Melbourne. Call us on <a href="tel:+61400184717" style="color:var(--navy);font-weight:600;text-decoration:none">0400 184 717</a>, or fill in the form and we'll get back to you within 24 hours.</p>
-        <p style="font-size:17px;line-height:1.7;color:var(--muted);margin:0 0 18px">All our technicians are fully qualified to service and repair all leading makes and models on the spot. If an issue can't be fixed, we'll quickly order a replacement and install it — so you get back to business swiftly.</p>
-        <p style="font-size:17px;line-height:1.7;color:var(--muted);margin:0 0 36px">Client satisfaction is our number-one priority, and we leave no stone unturned to ensure you receive a prompt response, reliable service and high-quality workmanship.</p>
+        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:38px;line-height:1.08;letter-spacing:-0.02em;color:var(--navy);margin:0 0 16px">Every suburb we service</h2>
+        <p style="font-size:17px;line-height:1.65;color:var(--muted);margin:0">Don't see your suburb? Call us — we likely cover it.</p>
       </div>
-      <div style="background:#fff;border:1px solid var(--line);border-radius:0;padding:44px;box-shadow:0 20px 50px rgba(14,28,109,0.08);border-top:4px solid var(--red)">
-        <h3 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:24px;color:var(--navy);margin:0 0 6px">Send us a message</h3>
-        <p style="font-size:15px;color:var(--muted);margin:0 0 26px">Fields marked required must be completed.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
-          <div>
-            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Name <span style="color:var(--red)">*</span></label>
-            <input placeholder="Your name" style="font-family:inherit;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none;width:100%">
+      <sc-for list="{{ regions }}" as="r" hint-placeholder-count="2">
+        <div style="margin-bottom:44px">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px">
+            <span style="font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#fff;background:var(--navy);padding:8px 16px">{{ r.name }}</span>
+            <span style="flex:1;height:1px;background:var(--line)"></span>
           </div>
-          <div>
-            <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Phone <span style="color:var(--red)">*</span></label>
-            <input placeholder="Phone" style="font-family:inherit;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none;width:100%">
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <sc-for list="{{ r.suburbs }}" as="s" hint-placeholder-count="24">
+              <span class="area-chip" style="font-size:14.5px;color:#3C4660;background:#fff;border:1px solid var(--line);border-radius:0;padding:9px 16px;cursor:default">{{ s }}</span>
+            </sc-for>
           </div>
         </div>
-        <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Email <span style="color:var(--red)">*</span></label>
-        <input placeholder="Email" style="font-family:inherit;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none;width:100%;margin-bottom:14px">
-        <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Services we offer</label>
-        <select style="font-family:inherit;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none;width:100%;margin-bottom:14px;color:var(--muted)">
-          <option>Select a service…</option>
-          <option>Combi oven repair</option>
-          <option>Dishwasher repair</option>
-          <option>Oven maintenance</option>
-          <option>Cooktop servicing</option>
-          <option>Fryer maintenance</option>
-          <option>Installation</option>
-        </select>
-        <label style="display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px">Message</label>
-        <textarea placeholder="Tell us about the issue or what you need" rows="4" style="font-family:inherit;font-size:15px;padding:14px 16px;border:1px solid #DCE0E9;border-radius:2px;background:#FBFCFE;outline:none;width:100%;margin-bottom:18px;resize:vertical"></textarea>
-        <button class="btn-red" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border:none;border-radius:2px;padding:16px;width:100%;cursor:pointer">Send Message</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== MAP ===== -->
-  <section style="background:var(--mist);padding:0 0 0 0">
-    <div style="position:relative;height:480px;width:100%;overflow:hidden;background:#E9ECF3;background-image:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(14,28,109,0.05) 38px,rgba(14,28,109,0.05) 39px),repeating-linear-gradient(90deg,transparent,transparent 38px,rgba(14,28,109,0.05) 38px,rgba(14,28,109,0.05) 39px)">
-      <div style="position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--red);z-index:3"></div>
-      <!-- faux roads -->
-      <div style="position:absolute;top:0;bottom:0;left:34%;width:14px;background:#fff;transform:skewX(-8deg)"></div>
-      <div style="position:absolute;left:0;right:0;top:58%;height:12px;background:#fff"></div>
-      <div style="position:absolute;left:0;right:0;top:30%;height:6px;background:#F2D9A8"></div>
-      <!-- pin -->
-      <div style="position:absolute;left:34%;top:58%;transform:translate(-50%,-100%);z-index:4;text-align:center">
-        <div style="position:relative;display:inline-block">
-          <span class="map-pin-pulse" style="position:absolute;left:50%;top:62%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--red)"></span>
-          <span style="position:relative;width:46px;height:46px;border-radius:50% 50% 50% 0;background:var(--red);display:flex;align-items:center;justify-content:center;transform:rotate(-45deg);box-shadow:0 10px 24px rgba(224,64,59,0.45)">
-            <span style="transform:rotate(45deg);color:#fff;display:flex">{{ pinIcon }}</span>
-          </span>
-        </div>
-      </div>
-      <!-- address card -->
-      <div style="position:absolute;left:56px;bottom:40px;z-index:5;background:#fff;border-radius:0;border-left:5px solid var(--red);padding:24px 28px;box-shadow:0 22px 50px rgba(14,28,109,0.18);max-width:340px">
-        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:var(--navy);margin-bottom:6px">PT&amp;L Equipment Services</div>
-        <div style="font-size:15px;line-height:1.55;color:var(--muted)">Unit 2, 44 Princes Hwy,<br>Eumemmerring VIC 3177</div>
-        <a href="https://maps.google.com/?q=Unit+2,+44+Princes+Hwy+Eumemmerring+VIC+3177" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:var(--red);text-decoration:none">Get directions {{ arrowIcon }}</a>
-      </div>
-      <!-- placeholder label -->
-      <div style="position:absolute;right:24px;top:24px;z-index:5;font-family:monospace;font-size:12px;color:#8A93A6;background:rgba(255,255,255,0.85);padding:8px 12px;border-radius:2px">embed Google Map here</div>
+      </sc-for>
     </div>
   </section>
 
@@ -298,12 +272,12 @@
 class Component extends DCLogic {
   ic(name, size = 22) {
     const P = {
-      check: '<polyline points="20 6 9 17 4 12"></polyline>',
+      arrow: '<path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>',
+      pin: '<path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle>',
+      map: '<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"></path><path d="M9 4v13"></path><path d="M15 7v13"></path>',
+      compass: '<circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>',
       phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path>',
       mail: '<rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>',
-      pin: '<path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle>',
-      printer: '<path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8" rx="1"></rect>',
-      arrow: '<path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>',
       facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>',
       youtube: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>',
       instagram: '<rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path>',
@@ -313,19 +287,20 @@ class Component extends DCLogic {
   renderVals() {
     return {
       services: ['Equipment Repairs', 'Combi Oven Repairs', 'Dishwasher Repairs', 'Oven Maintenance', 'Cooktop Servicing', 'Fryer Maintenance'],
+      arrowIcon: this.ic('arrow', 16),
       socFb: this.ic('facebook', 16), socYt: this.ic('youtube', 16), socIg: this.ic('instagram', 16),
-      pinIcon: this.ic('pin', 20), arrowIcon: this.ic('arrow', 16),
-      quick: [
-        { icon: this.ic('phone', 20), label: 'Call us today', value: '+61 400 184 717', href: 'tel:+61400184717' },
-        { icon: this.ic('mail', 20), label: 'Email us', value: 'service@ptlequipmentservices.com', href: 'mailto:service@ptlequipmentservices.com' },
-        { icon: this.ic('pin', 20), label: 'Visit us', value: 'Eumemmerring VIC 3177', href: '#map' },
-        { icon: this.ic('printer', 20), label: 'Fax', value: '03 8738 8967', href: '#' },
+      areaPages: [
+        { name: 'Melbourne West', href: 'melbourne-west.html', icon: this.ic('map', 28), desc: 'Combi oven, dishwasher, fryer and cooktop repairs across Docklands, Footscray, Yarraville and the wider Melbourne West region.' },
+        { name: 'Hallam', href: 'hallam.html', icon: this.ic('map', 28), desc: 'Commercial oven, combi, dishwasher, cooktop and fryer repairs and maintenance throughout Hallam and the south-east.' },
       ],
-      details: [
-        { icon: this.ic('pin', 20), label: 'Address', value: 'Unit 2, 44 Princes Hwy, Eumemmerring VIC 3177' },
-        { icon: this.ic('phone', 20), label: 'Phone', value: '+61 400 184 717' },
-        { icon: this.ic('printer', 20), label: 'Fax', value: '03 8738 8967' },
+      regions: [
+        { name: 'Victoria', suburbs: ['Melbourne CBD', 'Melbourne West', 'South Melbourne', 'South East Melbourne', 'North Melbourne', 'East Melbourne', 'Berwick', 'Brunswick', 'Carlton', 'Collingwood', 'Cranbourne', 'Docklands', 'Dandenong', 'Fitzroy', 'Gippsland', 'Kew', 'Glen Waverley', 'Narre Warren', 'Pakenham', 'St Kilda', 'Williamstown', 'Mulgrave', 'Noble Park', 'Keysborough', 'Springvale', 'Doveton', 'Balaclava', 'Chadstone', 'Elsternwick', 'Fountain Gate', 'Essendon', 'Hawthorn', 'Richmond', 'Ringwood', 'South Yarra', 'Prahran', 'Toorak', 'Wantirna', 'Hallam', 'Moorabbin', 'Highett', 'Bentleigh East', 'Clarinda'] },
+        { name: 'Queensland', suburbs: ['Brisbane', 'South Brisbane', 'East Brisbane', 'Brisbane Area', 'South Bank', 'Fortitude Valley', 'Gold Coast', 'Gold Coast Area', 'Sunshine Coast'] },
+      ],
+      contacts: [
+        { icon: this.ic('phone', 20), label: 'Call us today', value: '+61 400 184 717' },
         { icon: this.ic('mail', 20), label: 'Email', value: 'service@ptlequipmentservices.com' },
+        { icon: this.ic('pin', 20), label: 'Visit us', value: 'Unit 2, 44 Princes Hwy, Eumemmerring VIC 3177' },
       ],
     };
   }

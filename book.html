@@ -62,6 +62,22 @@
     .ptl-drawer a{color:#4A5268;text-decoration:none;padding:15px 2px;border-bottom:1px solid var(--mist);transition:color .2s}
     .ptl-drawer a:hover{color:var(--red) !important}
     #ptl-mnav:checked ~ .ptl-drawer{display:flex}
+    /* ===== transparent header merged into hero ===== */
+    [data-ptl-header]{border-bottom:none!important;box-shadow:none;position:fixed!important;top:0;left:0;right:0}
+    body[data-ptl-scrolled] [data-ptl-header]{background:var(--navy)!important;box-shadow:0 12px 34px rgba(7,11,31,0.30)!important}
+    [data-ptl-header]:has(#ptl-mnav:checked){background:var(--navy)!important;box-shadow:0 12px 34px rgba(7,11,31,0.30)!important}
+    [data-ptl-header] .navlink{color:rgba(255,255,255,0.82)!important}
+    [data-ptl-header] .navlink:hover{color:#fff!important}
+    [data-ptl-header] .navlink[style*="--navy"]{color:#fff!important;text-decoration:underline!important;text-decoration-color:var(--red)!important;text-decoration-thickness:2px;text-underline-offset:8px}
+    [data-ptl-header] .nav-caret{color:rgba(255,255,255,0.72)}
+    [data-ptl-header] .ptl-hdr-phone span:first-child{color:rgba(255,255,255,0.58)!important}
+    [data-ptl-header] .ptl-hdr-phone span:last-child{color:#fff!important}
+    [data-ptl-header] .ptl-burger{background:transparent!important;border-color:rgba(255,255,255,0.5)!important}
+    [data-ptl-header] .ptl-burger svg{stroke:#fff!important}
+    [data-ptl-hero][style]{padding-top:152px!important}
+    [data-ptl-hero-c][style]{padding-top:88px!important}
+    @media (max-width:980px){[data-ptl-hero][style]{padding-top:132px!important}}
+    @media (max-width:640px){[data-ptl-hero][style]{padding-top:124px!important}}
     @media (max-width:980px){
       .ptl-nav-desktop,.ptl-hdr-phone{display:none !important}
       .ptl-burger{display:flex !important}
@@ -96,34 +112,49 @@
     @media (max-width:860px){.ft-grid{grid-template-columns:1fr !important;gap:48px !important}.ft-form-grid{grid-template-columns:1fr !important}}
 
   </style>
+  <script>
+    (function(){
+      function upd(){
+        try{
+          if(window.scrollY>24){document.body.setAttribute('data-ptl-scrolled','');}
+          else{document.body.removeAttribute('data-ptl-scrolled');}
+        }catch(e){}
+      }
+      window.addEventListener('scroll',upd,{passive:true});
+      window.addEventListener('resize',upd,{passive:true});
+      window.addEventListener('load',upd);
+      document.addEventListener('DOMContentLoaded',upd);
+      setTimeout(upd,50);setTimeout(upd,300);setTimeout(upd,1200);
+    })();
+  </script>
 </helmet>
 
 <div style="font-family:'Hanken Grotesk',sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden">
 
   <!-- ===== HEADER ===== -->
-  <header style="background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60">
+  <header data-ptl-header style="background:linear-gradient(180deg,rgba(6,10,28,0.46) 0%,rgba(6,10,28,0.13) 62%,rgba(6,10,28,0) 100%);border-bottom:none;position:fixed;top:0;left:0;right:0;z-index:60;transition:background .32s ease,box-shadow .32s ease">
     <div style="max-width:1200px;margin:0 auto;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="index.html"><img src="assets/ptl-logo-dark.png" alt="PT&amp;L Equipment Services" style="height:42px;display:block"></a>
+      <a href="index.html" aria-label="PT&amp;L Equipment Services — home" style="display:block"><svg width="170" height="42" viewBox="0 0 178 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PT&amp;L Equipment Services" style="display:block"><text x="0" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">P</text><rect x="30" y="13" width="26" height="9" fill="#E0403B"></rect><rect x="38.5" y="4" width="9" height="34" fill="#E0403B"></rect><text x="56" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">L</text><text x="90" y="19" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">EQUIPMENT</text><text x="90" y="37" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">SERVICES</text></svg></a>
       <nav class="ptl-nav-desktop" style="display:flex;align-items:center;gap:36px;font-family:'Archivo',sans-serif;font-weight:600;font-size:15px">
         <a class="navlink" href="index.html" style="color:#4A5268;text-decoration:none">Home</a>
-        <a class="navlink" href="About.html" style="color:#4A5268;text-decoration:none">About</a>
+        <a class="navlink" href="about.html" style="color:#4A5268;text-decoration:none">About</a>
         <span class="nav-dd" style="display:inline-flex;align-items:center">
-          <a class="navlink" href="Services.html" style="color:#4A5268;text-decoration:none">Services<span class="nav-caret">▾</span></a>
+          <a class="navlink" href="services.html" style="color:#4A5268;text-decoration:none">Services<span class="nav-caret">▾</span></a>
           <span class="nav-dd-menu">
             <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
-              <a class="nav-dd-item" href="Services.html">{{ s }}</a>
+              <a class="nav-dd-item" href="services.html">{{ s }}</a>
             </sc-for>
           </span>
         </span>
         <span class="nav-dd" style="display:inline-flex;align-items:center">
-          <a class="navlink" href="Areas.html" style="color:#4A5268;text-decoration:none">Areas<span class="nav-caret">▾</span></a>
+          <a class="navlink" href="areas.html" style="color:#4A5268;text-decoration:none">Areas<span class="nav-caret">▾</span></a>
           <span class="nav-dd-menu">
-            <a class="nav-dd-item" href="Area-Melbourne-West.html">Melbourne West</a>
-            <a class="nav-dd-item" href="Area-Hallam.html">Hallam</a>
+            <a class="nav-dd-item" href="melbourne-west.html">Melbourne West</a>
+            <a class="nav-dd-item" href="hallam.html">Hallam</a>
           </span>
         </span>
-        <a class="navlink" href="Contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
-        <a class="navlink" href="Book.html" style="color:var(--navy);text-decoration:none">Book</a>
+        <a class="navlink" href="contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
+        <a class="navlink" href="book.html" style="color:var(--navy);text-decoration:none">Book</a>
       </nav>
       <div style="display:flex;align-items:center;gap:22px">
         <a class="ptl-hdr-phone" href="tel:+61400184717" style="text-decoration:none;line-height:1.15;text-align:right">
@@ -137,19 +168,19 @@
     <input type="checkbox" id="ptl-mnav" class="ptl-mnav-cb" aria-hidden="true">
     <div class="ptl-drawer">
       <a href="index.html">Home</a>
-      <a href="About.html">About</a>
-      <a href="Services.html">Services</a>
-      <a href="Area-Melbourne-West.html">Areas — Melbourne West</a>
-      <a href="Area-Hallam.html">Areas — Hallam</a>
-      <a href="Contact.html">Contact</a>
-      <a href="Book.html">Book</a>
-      <a class="btn-red" href="Contact.html" style="color:#fff;background:var(--red);border-radius:2px;padding:15px;text-decoration:none;text-align:center;font-weight:700;margin-top:16px;border-bottom:none">Get a Quote</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="melbourne-west.html">Areas — Melbourne West</a>
+      <a href="hallam.html">Areas — Hallam</a>
+      <a href="contact.html">Contact</a>
+      <a href="book.html">Book</a>
+      <a class="btn-red" href="contact.html" style="color:#fff;background:var(--red);border-radius:2px;padding:15px;text-decoration:none;text-align:center;font-weight:700;margin-top:16px;border-bottom:none">Get a Quote</a>
       <a href="tel:+61400184717" style="color:var(--navy);text-align:center;padding:14px;font-weight:800;font-size:18px;border-bottom:none">+61 400 184 717</a>
     </div>
   </header>
 
   <!-- ===== PAGE HERO ===== -->
-  <section style="position:relative;background:var(--navy);overflow:hidden;padding:96px 56px 104px">
+  <section style="position:relative;background:var(--navy);overflow:hidden;padding:96px 56px 104px" data-ptl-hero>
     <div style="position:absolute;inset:0;background:url('uploads/professional-kitchen-repairs.jpg') center/cover;opacity:0.2;z-index:0"></div>
     <div style="position:absolute;inset:0;background:linear-gradient(100deg,var(--navy) 32%,rgba(14,28,109,0.55) 100%);z-index:1"></div>
     <div style="max-width:1200px;margin:0 auto;position:relative;z-index:2">

@@ -22,11 +22,10 @@
     .navlink:hover{color:var(--red) !important}
     .btn-red{transition:background .2s,transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
     .btn-red:hover{background:#C8332E !important;transform:translateY(-3px);box-shadow:0 14px 28px rgba(224,64,59,0.34)}
-    .btn-red:active{transform:translateY(-1px);box-shadow:0 6px 14px rgba(224,64,59,0.30)}
     .btn-navy{transition:background .2s,transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
     .btn-navy:hover{background:#182A9E !important;transform:translateY(-3px);box-shadow:0 14px 28px rgba(14,28,109,0.30)}
     .btn-outline{transition:background .25s,color .25s,border-color .25s,transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
-    .btn-outline:hover{background:var(--navy) !important;color:#fff !important;border-color:var(--navy) !important;transform:translateY(-3px);box-shadow:0 14px 28px rgba(14,28,109,0.20)}
+    .btn-outline:hover{background:var(--navy) !important;color:#fff !important;border-color:var(--navy) !important;transform:translateY(-3px)}
     .btn-ghost{transition:background .25s,color .25s,border-color .25s,transform .25s cubic-bezier(.2,.7,.3,1)}
     .btn-ghost:hover{background:#fff !important;color:var(--navy) !important;border-color:#fff !important;transform:translateY(-3px)}
     .nav-dd{position:relative}
@@ -44,14 +43,11 @@
     .svc-card:hover .svc-img{transform:scale(1.06)}
     .svc-arrow{display:inline-block;transition:transform .3s}
     .svc-card:hover .svc-arrow{transform:translateX(7px)}
-    .why-card{transition:transform .3s,background .3s,border-color .3s}
-    .why-card:hover{transform:translateY(-5px);background:rgba(255,255,255,0.09) !important;border-color:rgba(224,64,59,0.55) !important}
     @keyframes tmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
     .tmarq-track{display:flex;gap:24px;width:max-content;animation:tmarq 48s linear infinite}
     .tmarq-wrap:hover .tmarq-track{animation-play-state:paused}
     .tcard{flex:none;width:430px;background:#fff;padding:40px;border-top:3px solid var(--red);position:relative}
     .tcard::before{content:'\201D';position:absolute;top:14px;right:30px;font-family:Georgia,serif;font-size:96px;line-height:1;color:#EEF0F4;font-weight:700;pointer-events:none}
-    /* footer form */
     .ftf{width:100%;font-family:'Hanken Grotesk',sans-serif;font-size:15px;color:#fff;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.22);padding:10px 2px 11px;outline:none;transition:border-color .2s}
     .ftf:focus{border-color:var(--red)}
     .ftf::placeholder{color:#7079A6}
@@ -69,6 +65,22 @@
     .ptl-drawer a{color:#4A5268;text-decoration:none;padding:15px 2px;border-bottom:1px solid var(--mist);transition:color .2s}
     .ptl-drawer a:hover{color:var(--red) !important}
     #ptl-mnav:checked ~ .ptl-drawer{display:flex}
+    /* ===== transparent header merged into hero ===== */
+    [data-ptl-header]{border-bottom:none!important;box-shadow:none;position:fixed!important;top:0;left:0;right:0}
+    body[data-ptl-scrolled] [data-ptl-header]{background:var(--navy)!important;box-shadow:0 12px 34px rgba(7,11,31,0.30)!important}
+    [data-ptl-header]:has(#ptl-mnav:checked){background:var(--navy)!important;box-shadow:0 12px 34px rgba(7,11,31,0.30)!important}
+    [data-ptl-header] .navlink{color:rgba(255,255,255,0.82)!important}
+    [data-ptl-header] .navlink:hover{color:#fff!important}
+    [data-ptl-header] .navlink[style*="--navy"]{color:#fff!important;text-decoration:underline!important;text-decoration-color:var(--red)!important;text-decoration-thickness:2px;text-underline-offset:8px}
+    [data-ptl-header] .nav-caret{color:rgba(255,255,255,0.72)}
+    [data-ptl-header] .ptl-hdr-phone span:first-child{color:rgba(255,255,255,0.58)!important}
+    [data-ptl-header] .ptl-hdr-phone span:last-child{color:#fff!important}
+    [data-ptl-header] .ptl-burger{background:transparent!important;border-color:rgba(255,255,255,0.5)!important}
+    [data-ptl-header] .ptl-burger svg{stroke:#fff!important}
+    [data-ptl-hero][style]{padding-top:152px!important}
+    [data-ptl-hero-c][style]{padding-top:88px!important}
+    @media (max-width:980px){[data-ptl-hero][style]{padding-top:132px!important}}
+    @media (max-width:640px){[data-ptl-hero][style]{padding-top:124px!important}}
     @media (max-width:980px){
       .ptl-nav-desktop,.ptl-hdr-phone{display:none !important}
       .ptl-burger{display:flex !important}
@@ -87,86 +99,164 @@
       .tcard{width:280px !important;padding:32px 26px !important}
     }
   </style>
+  <script>
+    (function(){
+      function upd(){
+        try{
+          if(window.scrollY>24){document.body.setAttribute('data-ptl-scrolled','');}
+          else{document.body.removeAttribute('data-ptl-scrolled');}
+        }catch(e){}
+      }
+      window.addEventListener('scroll',upd,{passive:true});
+      window.addEventListener('resize',upd,{passive:true});
+      window.addEventListener('load',upd);
+      document.addEventListener('DOMContentLoaded',upd);
+      setTimeout(upd,50);setTimeout(upd,300);setTimeout(upd,1200);
+    })();
+  </script>
 </helmet>
 
 <div style="font-family:'Hanken Grotesk',sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden">
 
   <!-- ===== HEADER ===== -->
-  <header style="background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60">
+  <header data-ptl-header style="background:linear-gradient(180deg,rgba(6,10,28,0.46) 0%,rgba(6,10,28,0.13) 62%,rgba(6,10,28,0) 100%);border-bottom:none;position:fixed;top:0;left:0;right:0;z-index:60;transition:background .32s ease,box-shadow .32s ease">
     <div style="max-width:1200px;margin:0 auto;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="index.html"><img src="assets/ptl-logo-dark.png" alt="PT&amp;L Equipment Services" style="height:42px;display:block"></a>
+      <a href="index.html" aria-label="PT&amp;L Equipment Services — home" style="display:block"><svg width="170" height="42" viewBox="0 0 178 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PT&amp;L Equipment Services" style="display:block"><text x="0" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">P</text><rect x="30" y="13" width="26" height="9" fill="#E0403B"></rect><rect x="38.5" y="4" width="9" height="34" fill="#E0403B"></rect><text x="56" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">L</text><text x="90" y="19" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">EQUIPMENT</text><text x="90" y="37" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">SERVICES</text></svg></a>
       <nav class="ptl-nav-desktop" style="display:flex;align-items:center;gap:36px;font-family:'Archivo',sans-serif;font-weight:600;font-size:15px">
         <a class="navlink" href="index.html" style="color:#4A5268;text-decoration:none">Home</a>
-        <a class="navlink" href="About.html" style="color:#4A5268;text-decoration:none">About</a>
+        <a class="navlink" href="about.html" style="color:var(--navy);text-decoration:none">About</a>
         <span class="nav-dd" style="display:inline-flex;align-items:center">
-          <a class="navlink" href="Services.html" style="color:var(--navy);text-decoration:none">Services<span class="nav-caret">▾</span></a>
+          <a class="navlink" href="services.html" style="color:#4A5268;text-decoration:none">Services<span class="nav-caret">▾</span></a>
           <span class="nav-dd-menu">
             <sc-for list="{{ navServices }}" as="s" hint-placeholder-count="6">
-              <a class="nav-dd-item" href="Services.html">{{ s }}</a>
+              <a class="nav-dd-item" href="services.html">{{ s }}</a>
             </sc-for>
           </span>
         </span>
         <span class="nav-dd" style="display:inline-flex;align-items:center">
-          <a class="navlink" href="Areas.html" style="color:#4A5268;text-decoration:none">Areas<span class="nav-caret">▾</span></a>
+          <a class="navlink" href="areas.html" style="color:#4A5268;text-decoration:none">Areas<span class="nav-caret">▾</span></a>
           <span class="nav-dd-menu">
-            <a class="nav-dd-item" href="Area-Melbourne-West.html">Melbourne West</a>
-            <a class="nav-dd-item" href="Area-Hallam.html">Hallam</a>
+            <a class="nav-dd-item" href="melbourne-west.html">Melbourne West</a>
+            <a class="nav-dd-item" href="hallam.html">Hallam</a>
           </span>
         </span>
-        <a class="navlink" href="Contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
-        <a class="navlink" href="Book.html" style="color:#4A5268;text-decoration:none">Book</a>
+        <a class="navlink" href="contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
+        <a class="navlink" href="book.html" style="color:#4A5268;text-decoration:none">Book</a>
       </nav>
       <div style="display:flex;align-items:center;gap:22px">
         <a class="ptl-hdr-phone" href="tel:+61400184717" style="text-decoration:none;line-height:1.15;text-align:right">
           <span style="display:block;font-size:12px;color:var(--muted)">Call us today</span>
           <span style="display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--navy);white-space:nowrap">+61 400 184 717</span>
         </a>
-        <a class="btn-red" href="Contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--red);border-radius:2px;padding:13px 24px;text-decoration:none;white-space:nowrap">Get a Quote</a>
+        <a class="btn-red" href="contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--red);border-radius:2px;padding:13px 24px;text-decoration:none;white-space:nowrap">Get a Quote</a>
         <label for="ptl-mnav" class="ptl-burger" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E1C6D" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></label>
       </div>
     </div>
     <input type="checkbox" id="ptl-mnav" class="ptl-mnav-cb" aria-hidden="true">
     <div class="ptl-drawer">
       <a href="index.html">Home</a>
-      <a href="About.html">About</a>
-      <a href="Services.html">Services</a>
-      <a href="Area-Melbourne-West.html">Areas — Melbourne West</a>
-      <a href="Area-Hallam.html">Areas — Hallam</a>
-      <a href="Contact.html">Contact</a>
-      <a href="Book.html">Book</a>
-      <a class="btn-red" href="Contact.html" style="color:#fff;background:var(--red);border-radius:2px;padding:15px;text-decoration:none;text-align:center;font-weight:700;margin-top:16px;border-bottom:none">Get a Quote</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="melbourne-west.html">Areas — Melbourne West</a>
+      <a href="hallam.html">Areas — Hallam</a>
+      <a href="contact.html">Contact</a>
+      <a href="book.html">Book</a>
+      <a class="btn-red" href="contact.html" style="color:#fff;background:var(--red);border-radius:2px;padding:15px;text-decoration:none;text-align:center;font-weight:700;margin-top:16px;border-bottom:none">Get a Quote</a>
       <a href="tel:+61400184717" style="color:var(--navy);text-align:center;padding:14px;font-weight:800;font-size:18px;border-bottom:none">+61 400 184 717</a>
     </div>
   </header>
 
   <!-- ===== PAGE HERO ===== -->
-  <section style="position:relative;background:var(--navy);overflow:hidden;padding:104px 56px 112px">
-    <div style="position:absolute;inset:0;background:url('uploads/commercial-oven-maintenance.jpg') center/cover;opacity:0.2;z-index:0"></div>
-    <div style="position:absolute;inset:0;background:linear-gradient(100deg,var(--navy) 34%,rgba(14,28,109,0.55) 100%);z-index:1"></div>
+  <section style="position:relative;background:var(--navy);overflow:hidden;padding:96px 56px 104px" data-ptl-hero>
+    <div style="position:absolute;inset:0;background:url('uploads/kitchen-appliances-in-professional-kitchen.jpg') center/cover;opacity:0.2;z-index:0"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(100deg,var(--navy) 32%,rgba(14,28,109,0.55) 100%);z-index:1"></div>
     <div style="max-width:1200px;margin:0 auto;position:relative;z-index:2">
-      <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px;margin-bottom:24px">Commercial kitchen equipment services</span>
-      <h1 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:54px;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin:0;max-width:960px">Commercial Kitchen Equipment Repairs &amp; Maintenance in <span style="text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:7px;text-underline-offset:6px">Melbourne &amp; Brisbane</span></h1>
-      <p style="font-size:19px;line-height:1.6;color:#AEB6E0;margin:26px 0 0;max-width:680px">Servicing, maintaining and repairing commercial kitchen equipment and appliances across South East Melbourne and Brisbane.</p>
+      <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px;margin-bottom:24px">About PT&amp;L Equipment Services</span>
+      <h1 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:58px;line-height:1.04;letter-spacing:-0.03em;color:#fff;margin:0;max-width:840px">21+ years keeping commercial kitchens <span style="text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:7px;text-underline-offset:6px">running</span></h1>
+      <p style="font-size:19px;line-height:1.65;color:#AEB6E0;margin:26px 0 0;max-width:620px">A leader in commercial catering kitchen equipment repairs, servicing and maintenance across South East Melbourne.</p>
     </div>
   </section>
 
-  <!-- ===== SERVICES GRID ===== -->
+  <!-- ===== TRUSTED LEADER ===== -->
+  <section style="background:#fff;padding:130px 56px">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:stretch">
+      <div style="position:relative;height:100%">
+        <image-slot id="ptl-about-hero" src="uploads/professional-kitchen-repairs.jpg" fit="cover" radius="0" placeholder="Drop a technician at an open oven" style="width:100%;height:100%"></image-slot>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">About PT&amp;L Equipment Services</span>
+        </div>
+        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:42px;line-height:1.08;letter-spacing:-0.02em;color:var(--navy);margin:0 0 24px">A trusted leader in commercial kitchen appliance repair</h2>
+        <p style="font-size:18px;line-height:1.7;color:var(--muted);margin:0 0 28px">For more than 21 years, PT&amp;L Equipment Services has provided professional commercial kitchen equipment repairs, maintenance and installations across South East Melbourne. Our experienced technicians work with all major brands — helping restaurants, cafés, bakeries and catering businesses minimise downtime and keep their operations running smoothly. With a reputation for quality workmanship, honest advice and reliable service, we're committed to keeping your commercial kitchen operating safely and efficiently.</p>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:36px">
+          <sc-for list="{{ aboutChecks }}" as="c" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:13px">
+              <span style="width:26px;height:26px;border-radius:50%;background:#FCEAE9;color:var(--red);display:flex;align-items:center;justify-content:center;flex:none">{{ c.icon }}</span>
+              <span style="font-weight:600;font-size:17px;color:var(--ink)">{{ c.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a class="btn-red" href="contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:16px 30px;text-decoration:none">Get a Quote Today</a>
+          <a class="btn-navy" href="tel:+61400184717" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--navy);border-radius:2px;padding:16px 28px;text-decoration:none;white-space:nowrap">+61 400 184 717</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FULL-BLEED ===== -->
+  <section style="position:relative;background:linear-gradient(180deg,#fff 0%,#fff 50%,var(--navy) 50%,var(--navy) 100%);padding:0;display:flex;justify-content:center">
+    <div style="position:relative;width:80%;height:520px;overflow:hidden">
+      <image-slot id="about-band" src="uploads/oven-repair-by-two-men-in-a-home-2026-03-25-22-36-55-utc.jpg" fit="cover" radius="0" placeholder="Drop a two-technicians-at-oven photo" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,31,0.28) 0%,rgba(7,11,31,0.10) 50%,rgba(7,11,31,0.50) 100%)"></div>
+    </div>
+  </section>
+
+  <!-- ===== OUR TEAM (navy) ===== -->
+  <section style="background:var(--navy);padding:140px 56px">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.05fr 0.95fr;gap:76px;align-items:center">
+      <div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">Our team</span>
+        </div>
+        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:44px;line-height:1.06;letter-spacing:-0.025em;color:#fff;margin:0 0 22px">Small team, family values, exceptional service every time.</h2>
+        <p style="font-size:18px;line-height:1.7;color:#AEB6E0;margin:0 0 30px;max-width:520px">With years of experience servicing and repairing commercial catering equipment, PT&amp;L Equipment Services understands the demands of busy commercial kitchens. Our skilled technicians support restaurants, cafés, bakeries and hospitality venues across South East Melbourne — delivering reliable repairs, preventative maintenance and quality workmanship to keep your equipment operating safely, efficiently and with minimal downtime.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 28px;margin-bottom:38px">
+          <sc-for list="{{ teamChecks }}" as="c" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="width:26px;height:26px;border-radius:50%;background:rgba(224,64,59,0.2);color:#FF9591;display:flex;align-items:center;justify-content:center;flex:none">{{ c.icon }}</span>
+              <span style="font-weight:600;font-size:16px;color:#E7EAF8">{{ c.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a class="btn-red" href="contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:16px 30px;text-decoration:none">Get a Quote Today</a>
+          <a class="btn-ghost" href="tel:+61400184717" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:transparent;border:1.5px solid rgba(255,255,255,0.3);border-radius:2px;padding:14.5px 28px;text-decoration:none;white-space:nowrap">+61 400 184 717</a>
+        </div>
+      </div>
+      <div style="position:relative">
+        <image-slot id="ptl-team" src="uploads/bearded-handyman-in-working-overall-repairing-coff-F8G2AEF.jpg" fit="cover" radius="0" placeholder="Drop a technician-at-work photo" style="width:100%;height:560px"></image-slot>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
   <section id="services" style="background:#fff;padding:130px 56px">
     <div style="max-width:1200px;margin:0 auto">
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:30px;flex-wrap:wrap">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:56px;flex-wrap:wrap">
         <div style="max-width:640px">
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
             <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">What we do</span>
           </div>
-          <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:46px;line-height:1.05;letter-spacing:-0.025em;color:var(--navy);margin:0 0 18px">Full-service repair &amp; maintenance</h2>
-          <p style="font-size:18px;line-height:1.65;color:var(--muted);margin:0;max-width:560px">From emergency breakdowns to scheduled servicing, we keep every appliance in your kitchen running at its best.</p>
+          <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:46px;line-height:1.05;letter-spacing:-0.025em;color:var(--navy);margin:0">Full-service repair &amp; maintenance</h2>
         </div>
         <div style="display:flex;gap:14px;flex-wrap:wrap;padding-bottom:6px">
-          <a class="btn-red" href="Contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:16px 28px;text-decoration:none;white-space:nowrap">Get a Quote Today</a>
-          <a class="btn-outline" href="#services" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--navy);background:#fff;border:1.5px solid #D6DAE4;border-radius:2px;padding:14.5px 26px;text-decoration:none;white-space:nowrap">Our Services</a>
+          <a class="btn-red" href="contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:16px 28px;text-decoration:none;white-space:nowrap">Get a Quote Today</a>
+          <a class="btn-outline" href="services.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--navy);background:#fff;border:1.5px solid #D6DAE4;border-radius:2px;padding:14.5px 26px;text-decoration:none;white-space:nowrap">Our Services</a>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:30px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:30px">
         <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
           <div class="svc-card" style="background:#fff;border:1px solid var(--line);border-radius:0;overflow:hidden">
             <div style="overflow:hidden;height:210px;position:relative">
@@ -180,68 +270,6 @@
             </div>
           </div>
         </sc-for>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FULL-BLEED TEAM ===== -->
-  <section style="position:relative;background:linear-gradient(180deg,#fff 0%,#fff 50%,var(--navy) 50%,var(--navy) 100%);padding:0;display:flex;justify-content:center">
-    <div style="position:relative;width:80%;height:520px;overflow:hidden">
-      <image-slot id="svc-team" src="uploads/collaboration-work-photo-of-two-mechanics-working-MWD8M2H.jpg" fit="cover" radius="0" placeholder="Drop a technicians-at-work photo" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
-      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,31,0.28) 0%,rgba(7,11,31,0.10) 50%,rgba(7,11,31,0.50) 100%)"></div>
-    </div>
-  </section>
-
-  <!-- ===== WHY CHOOSE US ===== -->
-  <section style="background:var(--navy);padding:140px 56px">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:0.9fr 1.1fr;gap:72px;align-items:center">
-      <div>
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">Why choose us</span>
-        </div>
-        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:44px;line-height:1.06;letter-spacing:-0.025em;color:#fff;margin:0 0 22px">Prevent breakdowns before they happen</h2>
-        <p style="font-size:18px;line-height:1.7;color:#AEB6E0;margin:0 0 34px;max-width:440px">Planned maintenance is the perfect way to take care of issues before they turn disastrous — so nothing fails mid-service and your operations stay running.</p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap">
-          <a class="btn-red" href="Contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:16px 30px;text-decoration:none">Get a Quote Today</a>
-          <a class="btn-ghost" href="tel:+61400184717" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:transparent;border:1.5px solid rgba(255,255,255,0.3);border-radius:2px;padding:14.5px 28px;text-decoration:none;white-space:nowrap">+61 400 184 717</a>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
-        <sc-for list="{{ whyPoints }}" as="w" hint-placeholder-count="4">
-          <div class="why-card" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:0;padding:30px">
-            <div style="width:54px;height:54px;border-radius:0;background:rgba(224,64,59,0.18);color:#FF9591;display:flex;align-items:center;justify-content:center;margin-bottom:18px">{{ w.icon }}</div>
-            <h3 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:19px;color:#fff;margin:0 0 9px">{{ w.title }}</h3>
-            <p style="font-size:14.5px;line-height:1.6;color:#AEB6E0;margin:0">{{ w.desc }}</p>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== AREAS ===== -->
-  <section id="areas" style="background:var(--mist);padding:130px 56px">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.05fr 0.95fr;gap:72px;align-items:center">
-      <div>
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-          <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px">Areas we service</span>
-        </div>
-        <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:42px;line-height:1.08;letter-spacing:-0.02em;color:var(--navy);margin:0 0 16px">Servicing Victoria &amp; Queensland</h2>
-        <p style="font-size:18px;line-height:1.65;color:var(--muted);margin:0 0 30px;max-width:520px">Mobile technicians covering all of Melbourne and Brisbane. Don't see your suburb? Call us — we likely cover it.</p>
-        <div style="margin-bottom:18px">
-          <span style="font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-right:10px">Victoria</span>
-          <span style="font-size:15px;line-height:2;color:#3C4660">{{ regionsVic }}</span>
-        </div>
-        <div style="margin-bottom:34px">
-          <span style="font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-right:10px">Queensland</span>
-          <span style="font-size:15px;line-height:2;color:#3C4660">{{ regionsQld }}</span>
-        </div>
-        <div style="display:flex;gap:14px;flex-wrap:wrap">
-          <a class="btn-red" href="Contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:16px 28px;text-decoration:none">Get a Quote Today</a>
-          <a class="btn-navy" href="tel:+61400184717" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--navy);border-radius:2px;padding:16px 28px;text-decoration:none;white-space:nowrap">+61 400 184 717</a>
-        </div>
-      </div>
-      <div style="position:relative">
-        <image-slot id="svc-areas" src="uploads/dont-delay-with-repair-close-up-of-repairman-exami-W6GY7FJ.jpg" fit="cover" radius="0" placeholder="Drop a technician / service photo" style="width:100%;height:520px"></image-slot>
       </div>
     </div>
   </section>
@@ -353,17 +381,15 @@
 class Component extends DCLogic {
   ic(name, size = 22) {
     const P = {
-      arrow: '<path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>',
-      shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path>',
-      clock: '<circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>',
-      star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>',
-      tag: '<path d="M12.59 2.59A2 2 0 0 0 11.17 2H4a2 2 0 0 0-2 2v7.17a2 2 0 0 0 .59 1.41l8.7 8.7a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42z"></path><circle cx="7.5" cy="7.5" r="1"></circle>',
+      check: '<polyline points="20 6 9 17 4 12"></polyline>',
     };
-    return React.createElement('svg', { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round', style: { display: 'block', flex: 'none' }, dangerouslySetInnerHTML: { __html: P[name] || '' } });
+    return React.createElement('svg', { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round', style: { display: 'block', flex: 'none' }, dangerouslySetInnerHTML: { __html: P[name] || '' } });
   }
   renderVals() {
     return {
       navServices: ['Equipment Repairs', 'Combi Oven Repairs', 'Dishwasher Repairs', 'Oven Maintenance', 'Cooktop Servicing', 'Fryer Maintenance'],
+      aboutChecks: ['Over 21+ years of industry experience', 'Specialists in commercial kitchen equipment', 'Honest advice & quality workmanship', 'Fast, reliable, 5★ service'].map(label => ({ label, icon: this.ic('check', 13) })),
+      teamChecks: ['We get it right the first time', 'All work is covered by warranty', 'Free fixed-price quotes', 'Five-star customer service'].map(label => ({ label, icon: this.ic('check', 13) })),
       services: [
         { slot: 'ptl-svc-1', num: '01', src: 'uploads/Combi-Oven-Repairs.jpg', img: 'Combi oven photo', title: 'Combi Oven Repairs', desc: 'Diagnostics, board & element replacement and recalibration for all major combi oven brands.' },
         { slot: 'ptl-svc-2', num: '02', src: 'uploads/commercial-cooktop-servicing.jpg', img: 'Cooktop / range photo', title: 'Cooktop & Oven Repairs', desc: 'Gas and electric ranges, ovens and grills serviced and repaired to keep your line moving.' },
@@ -372,14 +398,6 @@ class Component extends DCLogic {
         { slot: 'ptl-svc-5', num: '05', src: 'uploads/commercial-oven-maintenance.jpg', img: 'Maintenance photo', title: 'Preventative Maintenance', desc: 'Scheduled servicing plans that reduce downtime and extend the life of your equipment.' },
         { slot: 'ptl-svc-6', num: '06', src: 'uploads/equipment-repair.jpg', img: 'Installation photo', title: 'Installation', desc: 'Professional supply and install of commercial kitchen equipment, done right the first time.' },
       ],
-      whyPoints: [
-        { icon: this.ic('shield', 24), title: 'Fully Insured', desc: 'Skilled, professional and fully insured technicians you can trust on site.' },
-        { icon: this.ic('clock', 24), title: 'Prompt Service', desc: 'Reliable mobile callouts that minimise your kitchen downtime.' },
-        { icon: this.ic('star', 24), title: 'Quality Work', desc: 'High-quality repairs done right the first time, backed by 21+ years.' },
-        { icon: this.ic('tag', 24), title: 'Honest Pricing', desc: 'Fair, competitive and transparent quotes — no hidden fees.' },
-      ],
-      regionsVic: 'Balaclava • Bentleigh East • Berwick • Brunswick • Carlton • Chadstone • Clarinda • Collingwood • Cranbourne • Dandenong • Docklands • Doveton • East Melbourne • Elsternwick • Essendon • Fitzroy • Fountain Gate • Gippsland • Glen Waverley • Hallam • Hawthorn • Highett • Kew • Keysborough • Melbourne CBD • Melbourne West • Moorabbin • Mulgrave • Narre Warren • Noble Park • North Melbourne • Pakenham • Prahran • Richmond • Ringwood • South East Melbourne • South Yarra • Springvale • St Kilda • Toorak • Wantirna • Williamstown',
-      regionsQld: 'Brisbane • Brisbane Area • East Brisbane • Fortitude Valley • Gold Coast • Gold Coast Area • South Bank • South Brisbane • Sunshine Coast',
       stats: [
         { num: '21+', label: 'Years experience' },
         { num: '100%', label: 'Fully insured' },

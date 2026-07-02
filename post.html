@@ -60,6 +60,22 @@
     .ptl-drawer a{color:#4A5268;text-decoration:none;padding:15px 2px;border-bottom:1px solid var(--mist);transition:color .2s}
     .ptl-drawer a:hover{color:var(--red) !important}
     #ptl-mnav:checked ~ .ptl-drawer{display:flex}
+    /* ===== transparent header merged into hero ===== */
+    [data-ptl-header]{border-bottom:none!important;box-shadow:none;position:fixed!important;top:0;left:0;right:0}
+    body[data-ptl-scrolled] [data-ptl-header]{background:var(--navy)!important;box-shadow:0 12px 34px rgba(7,11,31,0.30)!important}
+    [data-ptl-header]:has(#ptl-mnav:checked){background:var(--navy)!important;box-shadow:0 12px 34px rgba(7,11,31,0.30)!important}
+    [data-ptl-header] .navlink{color:rgba(255,255,255,0.82)!important}
+    [data-ptl-header] .navlink:hover{color:#fff!important}
+    [data-ptl-header] .navlink[style*="--navy"]{color:#fff!important;text-decoration:underline!important;text-decoration-color:var(--red)!important;text-decoration-thickness:2px;text-underline-offset:8px}
+    [data-ptl-header] .nav-caret{color:rgba(255,255,255,0.72)}
+    [data-ptl-header] .ptl-hdr-phone span:first-child{color:rgba(255,255,255,0.58)!important}
+    [data-ptl-header] .ptl-hdr-phone span:last-child{color:#fff!important}
+    [data-ptl-header] .ptl-burger{background:transparent!important;border-color:rgba(255,255,255,0.5)!important}
+    [data-ptl-header] .ptl-burger svg{stroke:#fff!important}
+    [data-ptl-hero][style]{padding-top:152px!important}
+    [data-ptl-hero-c][style]{padding-top:88px!important}
+    @media (max-width:980px){[data-ptl-hero][style]{padding-top:132px!important}}
+    @media (max-width:640px){[data-ptl-hero][style]{padding-top:124px!important}}
     @media (max-width:980px){
       .ptl-nav-desktop,.ptl-hdr-phone{display:none !important}
       .ptl-burger{display:flex !important}
@@ -94,60 +110,75 @@
     @media (max-width:860px){.ft-grid{grid-template-columns:1fr !important;gap:48px !important}.ft-form-grid{grid-template-columns:1fr !important}}
 
   </style>
+  <script>
+    (function(){
+      function upd(){
+        try{
+          if(window.scrollY>24){document.body.setAttribute('data-ptl-scrolled','');}
+          else{document.body.removeAttribute('data-ptl-scrolled');}
+        }catch(e){}
+      }
+      window.addEventListener('scroll',upd,{passive:true});
+      window.addEventListener('resize',upd,{passive:true});
+      window.addEventListener('load',upd);
+      document.addEventListener('DOMContentLoaded',upd);
+      setTimeout(upd,50);setTimeout(upd,300);setTimeout(upd,1200);
+    })();
+  </script>
 </helmet>
 
 <div style="font-family:'Hanken Grotesk',sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden">
 
   <!-- ===== HEADER ===== -->
-  <header style="background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60">
+  <header data-ptl-header style="background:linear-gradient(180deg,rgba(6,10,28,0.46) 0%,rgba(6,10,28,0.13) 62%,rgba(6,10,28,0) 100%);border-bottom:none;position:fixed;top:0;left:0;right:0;z-index:60;transition:background .32s ease,box-shadow .32s ease">
     <div style="max-width:1200px;margin:0 auto;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="index.html"><img src="assets/ptl-logo-dark.png" alt="PT&amp;L Equipment Services" style="height:42px;display:block"></a>
+      <a href="index.html" aria-label="PT&amp;L Equipment Services — home" style="display:block"><svg width="170" height="42" viewBox="0 0 178 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PT&amp;L Equipment Services" style="display:block"><text x="0" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">P</text><rect x="30" y="13" width="26" height="9" fill="#E0403B"></rect><rect x="38.5" y="4" width="9" height="34" fill="#E0403B"></rect><text x="56" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">L</text><text x="90" y="19" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">EQUIPMENT</text><text x="90" y="37" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">SERVICES</text></svg></a>
       <nav class="ptl-nav-desktop" style="display:flex;align-items:center;gap:36px;font-family:'Archivo',sans-serif;font-weight:600;font-size:15px">
         <a class="navlink" href="index.html" style="color:#4A5268;text-decoration:none">Home</a>
-        <a class="navlink" href="About.html" style="color:#4A5268;text-decoration:none">About</a>
+        <a class="navlink" href="about.html" style="color:#4A5268;text-decoration:none">About</a>
         <span class="nav-dd" style="display:inline-flex;align-items:center">
-          <a class="navlink" href="Services.html" style="color:#4A5268;text-decoration:none">Services<span class="nav-caret">▾</span></a>
+          <a class="navlink" href="services.html" style="color:#4A5268;text-decoration:none">Services<span class="nav-caret">▾</span></a>
           <span class="nav-dd-menu">
             <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
-              <a class="nav-dd-item" href="Services.html">{{ s }}</a>
+              <a class="nav-dd-item" href="services.html">{{ s }}</a>
             </sc-for>
           </span>
         </span>
         <span class="nav-dd" style="display:inline-flex;align-items:center">
-          <a class="navlink" href="Areas.html" style="color:#4A5268;text-decoration:none">Areas<span class="nav-caret">▾</span></a>
+          <a class="navlink" href="areas.html" style="color:#4A5268;text-decoration:none">Areas<span class="nav-caret">▾</span></a>
           <span class="nav-dd-menu">
-            <a class="nav-dd-item" href="Area-Melbourne-West.html">Melbourne West</a>
-            <a class="nav-dd-item" href="Area-Hallam.html">Hallam</a>
+            <a class="nav-dd-item" href="melbourne-west.html">Melbourne West</a>
+            <a class="nav-dd-item" href="hallam.html">Hallam</a>
           </span>
         </span>
-        <a class="navlink" href="Blog.html" style="color:var(--navy);text-decoration:none">Blog</a>
-        <a class="navlink" href="Contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
+        <a class="navlink" href="blog.html" style="color:var(--navy);text-decoration:none">Blog</a>
+        <a class="navlink" href="contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
       </nav>
       <div style="display:flex;align-items:center;gap:22px">
         <a class="ptl-hdr-phone" href="tel:+61400184717" style="text-decoration:none;line-height:1.15;text-align:right">
           <span style="display:block;font-size:12px;color:var(--muted)">Call us today</span>
           <span style="display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--navy);white-space:nowrap">+61 400 184 717</span>
         </a>
-        <a class="btn-red" href="Book.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--red);border-radius:2px;padding:13px 24px;text-decoration:none;white-space:nowrap">Book a Service</a>
+        <a class="btn-red" href="book.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--red);border-radius:2px;padding:13px 24px;text-decoration:none;white-space:nowrap">Book a Service</a>
         <label for="ptl-mnav" class="ptl-burger" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E1C6D" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></label>
       </div>
     </div>
     <input type="checkbox" id="ptl-mnav" class="ptl-mnav-cb" aria-hidden="true">
     <div class="ptl-drawer">
       <a href="index.html">Home</a>
-      <a href="About.html">About</a>
-      <a href="Services.html">Services</a>
-      <a href="Area-Melbourne-West.html">Areas — Melbourne West</a>
-      <a href="Area-Hallam.html">Areas — Hallam</a>
-      <a href="Contact.html">Contact</a>
-      <a href="Book.html">Book</a>
-      <a class="btn-red" href="Contact.html" style="color:#fff;background:var(--red);border-radius:2px;padding:15px;text-decoration:none;text-align:center;font-weight:700;margin-top:16px;border-bottom:none">Get a Quote</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="melbourne-west.html">Areas — Melbourne West</a>
+      <a href="hallam.html">Areas — Hallam</a>
+      <a href="contact.html">Contact</a>
+      <a href="book.html">Book</a>
+      <a class="btn-red" href="contact.html" style="color:#fff;background:var(--red);border-radius:2px;padding:15px;text-decoration:none;text-align:center;font-weight:700;margin-top:16px;border-bottom:none">Get a Quote</a>
       <a href="tel:+61400184717" style="color:var(--navy);text-align:center;padding:14px;font-weight:800;font-size:18px;border-bottom:none">+61 400 184 717</a>
     </div>
   </header>
 
   <!-- ===== ARTICLE HERO ===== -->
-  <section style="position:relative;background:var(--navy);overflow:hidden;padding:88px 56px 96px">
+  <section style="position:relative;background:var(--navy);overflow:hidden;padding:88px 56px 96px" data-ptl-hero>
     <div style="max-width:860px;margin:0 auto;position:relative;z-index:2">
       <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px;margin-bottom:24px">Maintenance</span>
       <h1 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:50px;line-height:1.08;letter-spacing:-0.03em;color:#fff;margin:0 0 28px">5 signs your combi oven needs a service</h1>
@@ -198,7 +229,7 @@
 
       <h2>The bottom line</h2>
       <p>Most combi oven failures are gradual, which means they're preventable. A scheduled service catches worn seals, scale and tired components before they take the oven offline — and keeps it running efficiently in between. If you've noticed any of the signs above, it's worth booking a look-over now rather than waiting for the oven to make the decision for you.</p>
-      <p>PT&amp;L Equipment Services repairs and maintains combi ovens of all major brands across South East Melbourne. <a class="inline" href="Contact.html">Get in touch</a> or <a class="inline" href="Book.html">book a service</a> and we'll keep your kitchen running.</p>
+      <p>PT&amp;L Equipment Services repairs and maintains combi ovens of all major brands across South East Melbourne. <a class="inline" href="contact.html">Get in touch</a> or <a class="inline" href="book.html">book a service</a> and we'll keep your kitchen running.</p>
 
       <div style="display:flex;align-items:center;gap:14px;margin-top:48px;padding-top:34px;border-top:1px solid var(--line)">
         <span style="font-size:14px;color:var(--muted)">Share</span>
@@ -219,11 +250,11 @@
           </div>
           <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:36px;line-height:1.08;letter-spacing:-0.02em;color:var(--navy);margin:0">Related articles</h2>
         </div>
-        <a class="btn-outline" href="Blog.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:var(--navy);border:1.5px solid #D6DAE4;border-radius:2px;padding:13px 26px;text-decoration:none">View all articles</a>
+        <a class="btn-outline" href="blog.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:var(--navy);border:1.5px solid #D6DAE4;border-radius:2px;padding:13px 26px;text-decoration:none">View all articles</a>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:30px">
         <sc-for list="{{ related }}" as="p" hint-placeholder-count="3">
-          <a class="post-card" href="Post.html" style="background:#fff;border:1px solid var(--line);text-decoration:none;display:block">
+          <a class="post-card" href="post.html" style="background:#fff;border:1px solid var(--line);text-decoration:none;display:block">
             <div style="overflow:hidden;height:210px;position:relative">
               <div class="post-img-z" style="width:100%;height:100%">
                 <image-slot id="{{ p.slot }}" src="{{ p.src }}" fit="cover" radius="0" placeholder="{{ p.img }}" style="width:100%;height:210px"></image-slot>

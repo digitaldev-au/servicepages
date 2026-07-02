@@ -64,6 +64,22 @@
     .ptl-drawer a{color:#4A5268;text-decoration:none;padding:15px 2px;border-bottom:1px solid var(--mist);transition:color .2s}
     .ptl-drawer a:hover{color:var(--red) !important}
     #ptl-mnav:checked ~ .ptl-drawer{display:flex}
+    /* ===== transparent header merged into hero ===== */
+    [data-ptl-header]{border-bottom:none!important;box-shadow:none;position:fixed!important;top:0;left:0;right:0}
+    body[data-ptl-scrolled] [data-ptl-header]{background:var(--navy)!important;box-shadow:0 12px 34px rgba(7,11,31,0.30)!important}
+    [data-ptl-header]:has(#ptl-mnav:checked){background:var(--navy)!important;box-shadow:0 12px 34px rgba(7,11,31,0.30)!important}
+    [data-ptl-header] .navlink{color:rgba(255,255,255,0.82)!important}
+    [data-ptl-header] .navlink:hover{color:#fff!important}
+    [data-ptl-header] .navlink[style*="--navy"]{color:#fff!important;text-decoration:underline!important;text-decoration-color:var(--red)!important;text-decoration-thickness:2px;text-underline-offset:8px}
+    [data-ptl-header] .nav-caret{color:rgba(255,255,255,0.72)}
+    [data-ptl-header] .ptl-hdr-phone span:first-child{color:rgba(255,255,255,0.58)!important}
+    [data-ptl-header] .ptl-hdr-phone span:last-child{color:#fff!important}
+    [data-ptl-header] .ptl-burger{background:transparent!important;border-color:rgba(255,255,255,0.5)!important}
+    [data-ptl-header] .ptl-burger svg{stroke:#fff!important}
+    [data-ptl-hero][style]{padding-top:152px!important}
+    [data-ptl-hero-c][style]{padding-top:88px!important}
+    @media (max-width:980px){[data-ptl-hero][style]{padding-top:132px!important}}
+    @media (max-width:640px){[data-ptl-hero][style]{padding-top:124px!important}}
     @media (max-width:980px){
       .ptl-nav-desktop,.ptl-hdr-phone{display:none !important}
       .ptl-burger{display:flex !important}
@@ -84,68 +100,83 @@
       .tcard{width:280px !important;padding:32px 26px !important}
     }
   </style>
+  <script>
+    (function(){
+      function upd(){
+        try{
+          if(window.scrollY>24){document.body.setAttribute('data-ptl-scrolled','');}
+          else{document.body.removeAttribute('data-ptl-scrolled');}
+        }catch(e){}
+      }
+      window.addEventListener('scroll',upd,{passive:true});
+      window.addEventListener('resize',upd,{passive:true});
+      window.addEventListener('load',upd);
+      document.addEventListener('DOMContentLoaded',upd);
+      setTimeout(upd,50);setTimeout(upd,300);setTimeout(upd,1200);
+    })();
+  </script>
 </helmet>
 
 <div style="font-family:'Hanken Grotesk',sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden">
 
   <!-- ===== HEADER ===== -->
-  <header style="background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60">
+  <header data-ptl-header style="background:linear-gradient(180deg,rgba(6,10,28,0.46) 0%,rgba(6,10,28,0.13) 62%,rgba(6,10,28,0) 100%);border-bottom:none;position:fixed;top:0;left:0;right:0;z-index:60;transition:background .32s ease,box-shadow .32s ease">
     <div style="max-width:1200px;margin:0 auto;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="index.html"><img src="assets/ptl-logo-dark.png" alt="PT&amp;L Equipment Services" style="height:42px;display:block"></a>
+      <a href="index.html" aria-label="PT&amp;L Equipment Services — home" style="display:block"><svg width="170" height="42" viewBox="0 0 178 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PT&amp;L Equipment Services" style="display:block"><text x="0" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">P</text><rect x="30" y="13" width="26" height="9" fill="#E0403B"></rect><rect x="38.5" y="4" width="9" height="34" fill="#E0403B"></rect><text x="56" y="34" font-family="'Archivo',sans-serif" font-weight="800" font-style="italic" font-size="42" fill="#ffffff">L</text><text x="90" y="19" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">EQUIPMENT</text><text x="90" y="37" font-family="'Archivo',sans-serif" font-weight="700" font-size="13.5" letter-spacing="1.3" fill="#ffffff">SERVICES</text></svg></a>
       <nav class="ptl-nav-desktop" style="display:flex;align-items:center;gap:36px;font-family:'Archivo',sans-serif;font-weight:600;font-size:15px">
         <a class="navlink" href="index.html" style="color:#4A5268;text-decoration:none">Home</a>
-        <a class="navlink" href="About.html" style="color:#4A5268;text-decoration:none">About</a>
+        <a class="navlink" href="about.html" style="color:#4A5268;text-decoration:none">About</a>
         <span class="nav-dd" style="display:inline-flex;align-items:center">
-          <a class="navlink" href="Services.html" style="color:#4A5268;text-decoration:none">Services<span class="nav-caret">▾</span></a>
+          <a class="navlink" href="services.html" style="color:#4A5268;text-decoration:none">Services<span class="nav-caret">▾</span></a>
           <span class="nav-dd-menu">
             <sc-for list="{{ navServices }}" as="s" hint-placeholder-count="6">
-              <a class="nav-dd-item" href="Services.html">{{ s }}</a>
+              <a class="nav-dd-item" href="services.html">{{ s }}</a>
             </sc-for>
           </span>
         </span>
         <span class="nav-dd" style="display:inline-flex;align-items:center">
-          <a class="navlink" href="Areas.html" style="color:var(--navy);text-decoration:none">Areas<span class="nav-caret">▾</span></a>
+          <a class="navlink" href="areas.html" style="color:var(--navy);text-decoration:none">Areas<span class="nav-caret">▾</span></a>
           <span class="nav-dd-menu">
-            <a class="nav-dd-item" href="Area-Melbourne-West.html">Melbourne West</a>
-            <a class="nav-dd-item" href="Area-Hallam.html">Hallam</a>
+            <a class="nav-dd-item" href="melbourne-west.html">Melbourne West</a>
+            <a class="nav-dd-item" href="hallam.html">Hallam</a>
           </span>
         </span>
-        <a class="navlink" href="Contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
-        <a class="navlink" href="Book.html" style="color:#4A5268;text-decoration:none">Book</a>
+        <a class="navlink" href="contact.html" style="color:#4A5268;text-decoration:none">Contact</a>
+        <a class="navlink" href="book.html" style="color:#4A5268;text-decoration:none">Book</a>
       </nav>
       <div style="display:flex;align-items:center;gap:22px">
         <a class="ptl-hdr-phone" href="tel:+61400184717" style="text-decoration:none;line-height:1.15;text-align:right">
           <span style="display:block;font-size:12px;color:var(--muted)">Call us today</span>
           <span style="display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--navy);white-space:nowrap">+61 400 184 717</span>
         </a>
-        <a class="btn-red" href="Contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--red);border-radius:2px;padding:13px 24px;text-decoration:none;white-space:nowrap">Get a Quote</a>
+        <a class="btn-red" href="contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--red);border-radius:2px;padding:13px 24px;text-decoration:none;white-space:nowrap">Get a Quote</a>
         <label for="ptl-mnav" class="ptl-burger" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E1C6D" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></label>
       </div>
     </div>
     <input type="checkbox" id="ptl-mnav" class="ptl-mnav-cb" aria-hidden="true">
     <div class="ptl-drawer">
       <a href="index.html">Home</a>
-      <a href="About.html">About</a>
-      <a href="Services.html">Services</a>
-      <a href="Area-Melbourne-West.html">Areas — Melbourne West</a>
-      <a href="Area-Hallam.html">Areas — Hallam</a>
-      <a href="Contact.html">Contact</a>
-      <a href="Book.html">Book</a>
-      <a class="btn-red" href="Contact.html" style="color:#fff;background:var(--red);border-radius:2px;padding:15px;text-decoration:none;text-align:center;font-weight:700;margin-top:16px;border-bottom:none">Get a Quote</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="melbourne-west.html">Areas — Melbourne West</a>
+      <a href="hallam.html">Areas — Hallam</a>
+      <a href="contact.html">Contact</a>
+      <a href="book.html">Book</a>
+      <a class="btn-red" href="contact.html" style="color:#fff;background:var(--red);border-radius:2px;padding:15px;text-decoration:none;text-align:center;font-weight:700;margin-top:16px;border-bottom:none">Get a Quote</a>
       <a href="tel:+61400184717" style="color:var(--navy);text-align:center;padding:14px;font-weight:800;font-size:18px;border-bottom:none">+61 400 184 717</a>
     </div>
   </header>
 
   <!-- ===== HERO (full-bleed photo) ===== -->
-  <section style="position:relative;background:var(--navy);overflow:hidden;min-height:560px;display:flex;align-items:center">
-    <image-slot id="hallam-hero" src="uploads/services.png" fit="cover" radius="0" placeholder="Drop a technicians-in-kitchen photo" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
-    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2);z-index:1"></div>
+  <section style="position:relative;background:var(--navy);overflow:hidden;min-height:560px;display:flex;align-items:center" data-ptl-hero-c>
+    <image-slot id="mw-hero" src="uploads/professional-kitchen-in-hotel-restaurant-kitchen-u-2026-01-06-09-13-40-utc.jpg" fit="cover" radius="0" placeholder="Drop a technicians-in-kitchen photo" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+    <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(8,13,36,0.8) 0%,rgba(8,13,36,0.4) 55%,rgba(8,13,36,0.25) 100%);z-index:1"></div>
     <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:104px 56px;width:100%">
-      <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px;margin-bottom:24px">Commercial appliance repairs Hallam</span>
-      <h1 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:52px;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin:0;max-width:760px">Commercial Kitchen Equipment Repairs <span style="color:#fff">Hallam, Melbourne</span></h1>
-      <p style="font-size:19px;line-height:1.6;color:#C2C9E8;margin:26px 0 36px;max-width:620px">Minimise downtime with expert repairs, servicing and maintenance for commercial ovens, dishwashers, fryers, cooktops and catering equipment throughout Hallam.</p>
+      <span style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;color:#fff;background:var(--red);padding:7px 13px;margin-bottom:24px">Commercial appliance repairs Melbourne West</span>
+      <h1 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:52px;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin:0;max-width:760px">Commercial Kitchen Equipment Repairs <span style="color:#fff">Melbourne West</span></h1>
+      <p style="font-size:19px;line-height:1.6;color:#C2C9E8;margin:26px 0 36px;max-width:620px">Minimise downtime with expert repairs, servicing and maintenance for commercial ovens, dishwashers, fryers, cooktops and catering equipment throughout Melbourne West.</p>
       <div style="display:flex;gap:14px;flex-wrap:wrap">
-        <a class="btn-red" href="Contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:17px 32px;text-decoration:none">Get a Quote Today</a>
+        <a class="btn-red" href="contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:17px 32px;text-decoration:none">Get a Quote Today</a>
         <a class="btn-ghost" href="tel:+61400184717" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:transparent;border:1.5px solid rgba(255,255,255,0.4);border-radius:2px;padding:15.5px 30px;text-decoration:none;white-space:nowrap">+61 400 184 717</a>
       </div>
     </div>
@@ -166,11 +197,11 @@
   <!-- ===== INTRO (red) ===== -->
   <section style="background:var(--red);padding:30px 56px 104px;text-align:center">
     <div style="max-width:880px;margin:0 auto">
-      <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#FFD9D6;margin-bottom:22px">Commercial Kitchen Equipment Service &amp; Repairs Hallam</div>
-      <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:44px;line-height:1.1;letter-spacing:-0.025em;color:#fff;margin:0 0 24px">Need expert commercial appliance repairs in Hallam, Melbourne?</h2>
-      <p style="font-size:18px;line-height:1.7;color:#FFE5E3;margin:0 0 36px">When commercial kitchen equipment fails, every minute matters. That's why Hallam businesses trust PT&amp;L Equipment Services for dependable commercial appliance repairs — helping you minimise downtime, restore productivity, and keep your kitchen operating safely, efficiently and without unnecessary disruption.</p>
+      <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#FFD9D6;margin-bottom:22px">Commercial Kitchen Equipment Service &amp; Repairs Melbourne West</div>
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:800;font-size:44px;line-height:1.1;letter-spacing:-0.025em;color:#fff;margin:0 0 24px">Need expert commercial appliance repairs in Melbourne West?</h2>
+      <p style="font-size:18px;line-height:1.7;color:#FFE5E3;margin:0 0 36px">When commercial kitchen equipment fails, every minute matters. That's why Melbourne West businesses trust PT&amp;L Equipment Services for dependable commercial appliance repairs — helping you minimise downtime, restore productivity, and keep your kitchen operating safely, efficiently and without unnecessary disruption.</p>
       <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
-        <a class="btn-white" href="Contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--red);background:#fff;border-radius:40px;padding:16px 34px;text-decoration:none;display:inline-flex;align-items:center;gap:8px">Free Quote <span>→</span></a>
+        <a class="btn-white" href="contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--red);background:#fff;border-radius:40px;padding:16px 34px;text-decoration:none;display:inline-flex;align-items:center;gap:8px">Free Quote <span>→</span></a>
         <a class="btn-redghost" href="tel:+61400184717" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:transparent;border:1.5px solid rgba(255,255,255,0.6);border-radius:40px;padding:14.5px 32px;text-decoration:none;white-space:nowrap">Call +61 400 184 717</a>
       </div>
     </div>
@@ -179,15 +210,15 @@
   <!-- ===== TECHNICIAN IMAGE ===== -->
   <section style="background:linear-gradient(180deg,var(--red) 0%,var(--red) 30%,#fff 30%,#fff 100%);padding:0 56px;margin-top:-60px;position:relative;z-index:5">
     <div style="max-width:1000px;margin:0 auto;position:relative">
-      <image-slot id="hallam-van" src="uploads/bearded-handyman-in-working-overall-repairing-coff-F8G2AEF.jpg" fit="cover" radius="0" placeholder="Drop a technician-at-work photo" style="display:block;width:100%;height:540px;box-shadow:0 30px 70px rgba(8,13,36,0.28)"></image-slot>
+      <image-slot id="mw-van" src="uploads/dont-delay-with-repair-close-up-of-repairman-exami-W6GY7FJ.jpg" fit="cover" radius="0" placeholder="Drop a technician-at-work photo" style="display:block;width:100%;height:540px;box-shadow:0 30px 70px rgba(8,13,36,0.28)"></image-slot>
     </div>
   </section>
 
   <!-- ===== SEO COPY ===== -->
   <section style="background:#fff;padding:104px 56px">
     <div style="max-width:880px;margin:0 auto;text-align:center">
-      <p style="font-size:17px;line-height:1.8;color:var(--muted);margin:0 0 18px">When commercial kitchen equipment fails, downtime can impact productivity, customer service and profitability. That's why businesses trust PT&amp;L Equipment Services for dependable commercial appliance repairs in Hallam. Our experienced technicians provide prompt, professional repairs that help get your kitchen back up and running with minimal disruption.</p>
-      <p style="font-size:17px;line-height:1.8;color:var(--muted);margin:0 0 14px">We work with restaurants, cafés, catering companies, schools, aged-care facilities and hospitality venues throughout Hallam — delivering reliable repairs, servicing and preventative maintenance for a wide range of commercial kitchen equipment. Whether you're dealing with a faulty oven, dishwasher, fryer, cooktop or combi oven, we provide practical, cost-effective solutions designed for long-term performance.</p>
+      <p style="font-size:17px;line-height:1.8;color:var(--muted);margin:0 0 18px">When commercial kitchen equipment fails, downtime can impact productivity, customer service and profitability. That's why businesses trust PT&amp;L Equipment Services for dependable commercial appliance repairs in Melbourne West. Our experienced technicians provide prompt, professional repairs that help get your kitchen back up and running with minimal disruption.</p>
+      <p style="font-size:17px;line-height:1.8;color:var(--muted);margin:0 0 14px">We work with restaurants, cafés, catering companies, schools, aged-care facilities and hospitality venues throughout Melbourne West — delivering reliable repairs, servicing and preventative maintenance for a wide range of commercial kitchen equipment. Whether you're dealing with a faulty oven, dishwasher, fryer, cooktop or combi oven, we provide practical, cost-effective solutions designed for long-term performance.</p>
       <div style="margin:48px 0 0">
         <sc-for list="{{ seoBlocks }}" as="b" hint-placeholder-count="7">
           <div style="margin-bottom:34px">
@@ -196,14 +227,14 @@
           </div>
         </sc-for>
       </div>
-      <p style="font-size:17px;line-height:1.8;color:var(--ink);font-weight:600;margin:8px 0 0">PT&amp;L Equipment Services is committed to providing reliable commercial appliance repairs Hallam businesses can trust. With fast response times, quality workmanship and experienced technicians, we help keep your commercial kitchen operating at its best.</p>
+      <p style="font-size:17px;line-height:1.8;color:var(--ink);font-weight:600;margin:8px 0 0">PT&amp;L Equipment Services is committed to providing reliable commercial appliance repairs Melbourne West businesses can trust. With fast response times, quality workmanship and experienced technicians, we help keep your commercial kitchen operating at its best.</p>
     </div>
   </section>
 
   <!-- ===== FULL-BLEED ===== -->
   <section style="background:#fff;padding:0 56px">
     <div style="max-width:1200px;margin:0 auto;position:relative;height:520px;overflow:hidden">
-      <image-slot id="hallam-band" src="uploads/kitchen-appliances-in-professional-kitchen.jpg" fit="cover" radius="0" placeholder="Drop a close-up repair photo" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+      <image-slot id="mw-band" src="uploads/kitchen-appliances-in-professional-kitchen.jpg" fit="cover" radius="0" placeholder="Drop a close-up repair photo" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,31,0.18) 0%,rgba(7,11,31,0.05) 50%,rgba(7,11,31,0.4) 100%)"></div>
     </div>
   </section>
@@ -226,7 +257,7 @@
           <span style="font-size:15px;line-height:2;color:#3C4660">{{ regionsQld }}</span>
         </div>
         <div style="display:flex;gap:14px;flex-wrap:wrap">
-          <a class="btn-red" href="Contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:16px 28px;text-decoration:none">Get a Quote Today</a>
+          <a class="btn-red" href="contact.html" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--red);border-radius:2px;padding:16px 28px;text-decoration:none">Get a Quote Today</a>
           <a class="btn-navy" href="tel:+61400184717" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--navy);border-radius:2px;padding:16px 28px;text-decoration:none;white-space:nowrap">+61 400 184 717</a>
         </div>
       </div>
@@ -245,9 +276,9 @@
             </div>
           </div>
           <div style="position:absolute;left:24px;bottom:24px;z-index:5;background:#fff;border-left:5px solid var(--red);padding:20px 22px;box-shadow:0 22px 50px rgba(14,28,109,0.18);max-width:300px">
-            <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--navy);margin-bottom:6px">Serving Hallam</div>
-            <div style="font-size:14.5px;line-height:1.55;color:var(--muted)">Commercial appliance repairs across Hallam &amp; South-East Melbourne.</div>
-            <a href="https://maps.google.com/?q=Hallam+VIC+3803" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;margin-top:13px;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:var(--red);text-decoration:none">View on map <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--navy);margin-bottom:6px">Serving Melbourne West</div>
+            <div style="font-size:14.5px;line-height:1.55;color:var(--muted)">Commercial appliance repairs across Docklands, Footscray, Yarraville &amp; surrounds.</div>
+            <a href="https://maps.google.com/?q=Melbourne+West+VIC" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;margin-top:13px;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:var(--red);text-decoration:none">View on map <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
           </div>
         </div>
       </div>
@@ -377,16 +408,16 @@ class Component extends DCLogic {
         { icon: this.ic('award', 26), label: 'Experienced & Qualified Technicians' },
         { icon: this.ic('wrench', 26), label: 'Professional Quality Workmanship' },
         { icon: this.ic('shield', 26), label: 'Honest, Reliable & Friendly Service' },
-        { icon: this.ic('pin', 26), label: 'Area Specialist — Hallam, Melbourne' },
+        { icon: this.ic('pin', 26), label: 'Area Specialist — Melbourne West' },
       ],
       seoBlocks: [
-        { heading: 'Commercial Kitchen Equipment Services Hallam', body: 'PT&L Equipment Services provides comprehensive commercial kitchen equipment services Hallam businesses can rely on. From scheduled maintenance through to urgent repairs, we help ensure your equipment operates safely, efficiently and consistently. Regular servicing can extend equipment life, reduce costly breakdowns and improve overall kitchen performance.' },
-        { heading: 'Commercial Equipment Repairs Hallam', body: 'Our team specialises in commercial equipment repairs Hallam — offering fast fault diagnosis and reliable repairs across a broad range of commercial appliances. We understand the pressures of a busy kitchen environment and prioritise responsive service to minimise downtime and restore productivity as quickly as possible.' },
-        { heading: 'Commercial Combi Oven Repairs Hallam', body: 'Combi ovens require specialised knowledge and expertise. Our commercial combi oven repairs Hallam service addresses common issues including heating, incorrect calibration, steam-generation faults, control-panel problems and performance losses — helping maintain food quality and operational efficiency.' },
-        { heading: 'Commercial Dishwasher Repairs Hallam', body: 'A malfunctioning dishwasher can quickly affect hygiene standards and workflow. Our commercial dishwasher repairs Hallam service covers drainage issues, heating faults, pump failures and poor cleaning performance — ensuring your kitchen remains compliant, efficient and productive.' },
-        { heading: 'Commercial Oven Maintenance Hallam', body: 'Preventative commercial oven maintenance Hallam helps reduce unexpected breakdowns while improving temperature accuracy and cooking consistency. Regular inspections and servicing help protect your investment and keep your kitchen operating smoothly.' },
-        { heading: 'Commercial Cooktop Servicing Hallam', body: 'Our commercial cooktop servicing Hallam ensures burners, controls and safety systems operate efficiently and reliably. Routine servicing helps improve performance, reduce safety risks and support consistent cooking results.' },
-        { heading: 'Commercial Fryer Maintenance Hallam', body: 'Our commercial fryer maintenance Hallam service helps keep your frying equipment operating safely and efficiently. We inspect key components, heating systems and safety controls to maintain reliable performance and consistent cooking temperatures.' },
+        { heading: 'Commercial Kitchen Equipment Services Melbourne West', body: 'PT&L Equipment Services provides comprehensive commercial kitchen equipment services Melbourne West businesses can rely on. From scheduled maintenance through to urgent repairs, we help ensure your equipment operates safely, efficiently and consistently. Regular servicing can extend equipment life, reduce costly breakdowns and improve overall kitchen performance.' },
+        { heading: 'Commercial Equipment Repairs Melbourne West', body: 'Our team specialises in commercial equipment repairs Melbourne West — offering fast fault diagnosis and reliable repairs across a broad range of commercial appliances. We understand the pressures of a busy kitchen environment and prioritise responsive service to minimise downtime and restore productivity as quickly as possible.' },
+        { heading: 'Commercial Combi Oven Repairs Melbourne West', body: 'Combi ovens require specialised knowledge and expertise. Our commercial combi oven repairs Melbourne West service addresses common issues including heating, incorrect calibration, steam-generation faults, control-panel problems and performance losses — helping maintain food quality and operational efficiency.' },
+        { heading: 'Commercial Dishwasher Repairs Melbourne West', body: 'A malfunctioning dishwasher can quickly affect hygiene standards and workflow. Our commercial dishwasher repairs Melbourne West service covers drainage issues, heating faults, pump failures and poor cleaning performance — ensuring your kitchen remains compliant, efficient and productive.' },
+        { heading: 'Commercial Oven Maintenance Melbourne West', body: 'Preventative commercial oven maintenance Melbourne West helps reduce unexpected breakdowns while improving temperature accuracy and cooking consistency. Regular inspections and servicing help protect your investment and keep your kitchen operating smoothly.' },
+        { heading: 'Commercial Cooktop Servicing Melbourne West', body: 'Our commercial cooktop servicing Melbourne West ensures burners, controls and safety systems operate efficiently and reliably. Routine servicing helps improve performance, reduce safety risks and support consistent cooking results.' },
+        { heading: 'Commercial Fryer Maintenance Melbourne West', body: 'Our commercial fryer maintenance Melbourne West service helps keep your frying equipment operating safely and efficiently. We inspect key components, heating systems and safety controls to maintain reliable performance and consistent cooking temperatures.' },
       ],
       regionsVic: 'Balaclava • Bentleigh East • Berwick • Brunswick • Carlton • Chadstone • Clarinda • Collingwood • Cranbourne • Dandenong • Docklands • Doveton • East Melbourne • Elsternwick • Essendon • Fitzroy • Fountain Gate • Gippsland • Glen Waverley • Hallam • Hawthorn • Highett • Kew • Keysborough • Melbourne CBD • Melbourne West • Moorabbin • Mulgrave • Narre Warren • Noble Park • North Melbourne • Pakenham • Prahran • Richmond • Ringwood • South East Melbourne • South Yarra • Springvale • St Kilda • Toorak • Wantirna • Williamstown',
       regionsQld: 'Brisbane • Brisbane Area • East Brisbane • Fortitude Valley • Gold Coast • Gold Coast Area • South Bank • South Brisbane • Sunshine Coast',
